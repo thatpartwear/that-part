@@ -1,0 +1,46 @@
+[
+  {
+    "slug": "core-tee",
+    "name": "Core",
+    "description": "Everyday cotton t-shirt, soft and breathable.",
+    "price_cents": 45000,
+    "category": "t-shirts",
+    "images": ["/products/core-black.png"],
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["Black", "White", "Silver", "Gold", "Burgundy", "Navy Blue", "Dark Green"],
+    "stock": 50
+  },
+  {
+    "slug": "performance-tee",
+    "name": "Performance",
+    "description": "Polyester t-shirt built for training, moisture-wicking and quick-dry.",
+    "price_cents": 40000,
+    "category": "t-shirts",
+    "images": ["/products/performance-black.png"],
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["Black", "White", "Silver", "Gold", "Burgundy", "Navy Blue", "Dark Green"],
+    "stock": 50
+  },
+  {
+    "slug": "motion-shorts",
+    "name": "Motion",
+    "description": "Lightweight shorts with a full range of motion for training or the trail.",
+    "price_cents": 40000,
+    "category": "shorts",
+    "images": ["/products/motion-black.png"],
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["Black", "White", "Silver", "Gold", "Burgundy", "Navy Blue", "Dark Green"],
+    "stock": 50
+  },
+  {
+    "slug": "utility-sweatpants",
+    "name": "Utility",
+    "description": "Heavyweight sweatpants for warmup, recovery, or everyday wear.",
+    "price_cents": 65000,
+    "category": "sweatpants",
+    "images": ["/products/utility-black.png"],
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["Black", "White", "Silver", "Gold", "Burgundy", "Navy Blue", "Dark Green"],
+    "stock": 50
+  }
+]
