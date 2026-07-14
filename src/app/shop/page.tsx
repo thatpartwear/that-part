@@ -17,13 +17,17 @@ export default async function ShopPage({
 
   let products: Product[] | null = null;
   let categoryRows: { category: string }[] | null = null;
+  let debugError: string | null = null;
   try {
-    [{ data: products }, { data: categoryRows }] = await Promise.all([
+    const [productsRes, categoryRes] = await Promise.all([
       query.returns<Product[]>(),
       supabase.from("products").select("category").returns<{ category: string }[]>(),
     ]);
-  } catch {
-    // Supabase not configured yet — show the empty state below.
+    products = productsRes.data;
+    categoryRows = categoryRes.data;
+    if (productsRes.error) debugError = productsRes.error.message;
+  } catch (err) {
+    debugError = err instanceof Error ? err.message : String(err);
   }
 
   const categories = Array.from(
@@ -33,6 +37,11 @@ export default async function ShopPage({
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
       <h1 className="mb-6 text-2xl font-bold">Shop</h1>
+      {debugError && (
+        <p className="mb-6 rounded-md border border-red-300 bg-red-50 p-3 text-sm text-red-700">
+          DEBUG: {debugError}
+        </p>
+      )}
 
       {categories.length > 0 && (
         <div className="mb-8 flex flex-wrap gap-2 text-sm">
