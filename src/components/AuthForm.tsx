@@ -10,6 +10,7 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
   const [fullName, setFullName] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [confirmationSent, setConfirmationSent] = useState(false);
   const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent) {
@@ -18,14 +19,27 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
     setError(null);
 
     const supabase = createClient();
-    const { error } =
-      mode === "login"
-        ? await supabase.auth.signInWithPassword({ email, password })
-        : await supabase.auth.signUp({
-            email,
-            password,
-            options: { data: { full_name: fullName } },
-          });
+
+    if (mode === "login") {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      if (error) {
+        setError(error.message);
+        setLoading(false);
+        return;
+      }
+      router.push("/account");
+      router.refresh();
+      return;
+    }
+
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: { data: { full_name: fullName } },
+    });
 
     if (error) {
       setError(error.message);
@@ -33,8 +47,23 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
       return;
     }
 
+    if (!data.session) {
+      setConfirmationSent(true);
+      setLoading(false);
+      return;
+    }
+
     router.push("/account");
     router.refresh();
+  }
+
+  if (confirmationSent) {
+    return (
+      <p className="text-sm text-neutral-600">
+        Check your inbox at <strong>{email}</strong> for a confirmation link
+        to finish creating your account.
+      </p>
+    );
   }
 
   return (
