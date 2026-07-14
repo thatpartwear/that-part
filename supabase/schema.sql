@@ -31,6 +31,7 @@ create table if not exists public.products (
   price_cents integer not null check (price_cents >= 0),
   category text not null,
   images text[] not null default '{}',
+  color_images jsonb not null default '{}',
   sizes text[] not null default '{}',
   colors text[] not null default '{}',
   stock integer not null default 0,

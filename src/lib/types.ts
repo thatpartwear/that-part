@@ -6,6 +6,7 @@ export type Product = {
   price_cents: number;
   category: string;
   images: string[];
+  color_images: Record<string, string>;
   sizes: string[];
   colors: string[];
   stock: number;

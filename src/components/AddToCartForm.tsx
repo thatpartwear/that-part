@@ -5,9 +5,16 @@ import { useRouter } from "next/navigation";
 import type { Product } from "@/lib/types";
 import { useCartStore } from "@/lib/cart-store";
 
-export function AddToCartForm({ product }: { product: Product }) {
+export function AddToCartForm({
+  product,
+  color,
+  onColorChange,
+}: {
+  product: Product;
+  color: string;
+  onColorChange: (color: string) => void;
+}) {
   const [size, setSize] = useState(product.sizes[0] ?? "");
-  const [color, setColor] = useState(product.colors[0] ?? "");
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
   const addItem = useCartStore((state) => state.addItem);
@@ -25,7 +32,7 @@ export function AddToCartForm({ product }: { product: Product }) {
           slug: product.slug,
           name: product.name,
           priceCents: product.price_cents,
-          image: product.images[0] ?? null,
+          image: product.color_images[color] ?? product.images[0] ?? null,
           size,
           color,
           quantity,
@@ -69,7 +76,7 @@ export function AddToCartForm({ product }: { product: Product }) {
                 key={c}
                 type="button"
                 onClick={() => {
-                  setColor(c);
+                  onColorChange(c);
                   setAdded(false);
                 }}
                 aria-pressed={color === c}

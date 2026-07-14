@@ -6,6 +6,7 @@
     "price_cents": 45000,
     "category": "t-shirts",
     "images": ["/products/core-black.png"],
+    "color_images": { "Black": "/products/core-black.png" },
     "sizes": ["S", "M", "L", "XL"],
     "colors": ["Black", "White", "Silver", "Gold", "Burgundy", "Navy Blue", "Dark Green"],
     "stock": 50
@@ -17,6 +18,7 @@
     "price_cents": 40000,
     "category": "t-shirts",
     "images": ["/products/performance-black.png"],
+    "color_images": { "Black": "/products/performance-black.png" },
     "sizes": ["S", "M", "L", "XL"],
     "colors": ["Black", "White", "Silver", "Gold", "Burgundy", "Navy Blue", "Dark Green"],
     "stock": 50
@@ -28,6 +30,7 @@
     "price_cents": 40000,
     "category": "shorts",
     "images": ["/products/motion-black.png"],
+    "color_images": { "Black": "/products/motion-black.png" },
     "sizes": ["S", "M", "L", "XL"],
     "colors": ["Black", "White", "Silver", "Gold", "Burgundy", "Navy Blue", "Dark Green"],
     "stock": 50
@@ -39,6 +42,7 @@
     "price_cents": 65000,
     "category": "sweatpants",
     "images": ["/products/utility-black.png"],
+    "color_images": { "Black": "/products/utility-black.png" },
     "sizes": ["S", "M", "L", "XL"],
     "colors": ["Black", "White", "Silver", "Gold", "Burgundy", "Navy Blue", "Dark Green"],
     "stock": 50
