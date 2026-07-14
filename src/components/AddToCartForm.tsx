@@ -42,7 +42,10 @@ export function AddToCartForm({ product }: { product: Product }) {
               <button
                 key={s}
                 type="button"
-                onClick={() => setSize(s)}
+                onClick={() => {
+                  setSize(s);
+                  setAdded(false);
+                }}
                 aria-pressed={size === s}
                 className={`min-w-11 rounded-md border px-3 py-2 text-sm font-medium ${
                   size === s
@@ -65,7 +68,10 @@ export function AddToCartForm({ product }: { product: Product }) {
               <button
                 key={c}
                 type="button"
-                onClick={() => setColor(c)}
+                onClick={() => {
+                  setColor(c);
+                  setAdded(false);
+                }}
                 aria-pressed={color === c}
                 className={`rounded-md border px-3 py-2 text-sm font-medium ${
                   color === c
@@ -85,7 +91,10 @@ export function AddToCartForm({ product }: { product: Product }) {
         <div className="inline-flex items-center rounded-md border border-neutral-300">
           <button
             type="button"
-            onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+            onClick={() => {
+              setQuantity((q) => Math.max(1, q - 1));
+              setAdded(false);
+            }}
             disabled={quantity <= 1}
             className="px-3 py-2 text-sm font-medium disabled:cursor-not-allowed disabled:text-neutral-300"
             aria-label="Decrease quantity"
@@ -95,7 +104,10 @@ export function AddToCartForm({ product }: { product: Product }) {
           <span className="w-10 text-center text-sm">{quantity}</span>
           <button
             type="button"
-            onClick={() => setQuantity((q) => Math.min(product.stock, q + 1))}
+            onClick={() => {
+              setQuantity((q) => Math.min(product.stock, q + 1));
+              setAdded(false);
+            }}
             disabled={quantity >= product.stock}
             className="px-3 py-2 text-sm font-medium disabled:cursor-not-allowed disabled:text-neutral-300"
             aria-label="Increase quantity"
