@@ -5,14 +5,17 @@ import type { Product } from "@/lib/types";
 export default async function ShopPage({
   searchParams,
 }: {
-  searchParams: Promise<{ category?: string }>;
+  searchParams: Promise<{ category?: string; q?: string }>;
 }) {
-  const { category } = await searchParams;
+  const { category, q } = await searchParams;
   const supabase = await createClient();
 
   let query = supabase.from("products").select("*").order("name");
   if (category) {
     query = query.eq("category", category);
+  }
+  if (q) {
+    query = query.or(`name.ilike.%${q}%,description.ilike.%${q}%`);
   }
 
   let products: Product[] | null = null;
@@ -32,7 +35,9 @@ export default async function ShopPage({
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
-      <h1 className="mb-6 text-2xl font-bold">Shop</h1>
+      <h1 className="mb-6 text-2xl font-bold">
+        {q ? `Search results for "${q}"` : "Shop"}
+      </h1>
 
       {categories.length > 0 && (
         <div className="mb-8 flex flex-wrap gap-2 text-sm">
@@ -70,7 +75,9 @@ export default async function ShopPage({
         </div>
       ) : (
         <p className="text-neutral-500">
-          No products found{category ? ` in "${category}"` : ""}.
+          No products found
+          {category ? ` in "${category}"` : ""}
+          {q ? ` for "${q}"` : ""}.
         </p>
       )}
     </div>

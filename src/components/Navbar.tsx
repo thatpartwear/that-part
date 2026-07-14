@@ -1,7 +1,10 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { createClient } from "@/lib/supabase/server";
 import { CartCount } from "@/components/CartCount";
 import { SignOutButton } from "@/components/SignOutButton";
+import { SearchBox } from "@/components/SearchBox";
+import { SearchIcon, UserIcon } from "@/components/icons";
 
 export async function Navbar() {
   const supabase = await createClient();
@@ -20,19 +23,26 @@ export async function Navbar() {
           <Link href="/shop" className="hover:text-neutral-500">
             Shop
           </Link>
+          <Suspense fallback={<SearchIcon className="h-5 w-5" />}>
+            <SearchBox />
+          </Suspense>
           <Link href="/cart" className="hover:text-neutral-500">
             <CartCount />
           </Link>
           {user ? (
             <>
-              <Link href="/account" className="hover:text-neutral-500">
-                Account
+              <Link
+                href="/account"
+                aria-label="Account"
+                className="hover:text-neutral-500"
+              >
+                <UserIcon className="h-5 w-5" />
               </Link>
               <SignOutButton />
             </>
           ) : (
-            <Link href="/login" className="hover:text-neutral-500">
-              Sign in
+            <Link href="/login" aria-label="Sign in" className="hover:text-neutral-500">
+              <UserIcon className="h-5 w-5" />
             </Link>
           )}
         </nav>
