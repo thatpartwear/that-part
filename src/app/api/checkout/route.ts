@@ -85,8 +85,18 @@ export async function POST(request: Request) {
 
   const admin = createAdminClient();
 
-  const authToken = await getAuthToken();
-  const paymobOrderId = await createOrder(authToken, totalCents, paymobItems);
+  let authToken: string;
+  let paymobOrderId: number;
+  try {
+    authToken = await getAuthToken();
+    paymobOrderId = await createOrder(authToken, totalCents, paymobItems);
+  } catch (err) {
+    console.error("Paymob order creation failed:", err);
+    return NextResponse.json(
+      { error: "Payment provider is unavailable right now. Please try again shortly." },
+      { status: 502 }
+    );
+  }
 
   const { data: order, error: orderError } = await admin
     .from("orders")
@@ -116,12 +126,21 @@ export async function POST(request: Request) {
     );
   }
 
-  const paymentToken = await createPaymentKey(authToken, totalCents, paymobOrderId, {
-    first_name: contact.firstName,
-    last_name: contact.lastName,
-    email: contact.email,
-    phone_number: contact.phone,
-  });
+  let paymentToken: string;
+  try {
+    paymentToken = await createPaymentKey(authToken, totalCents, paymobOrderId, {
+      first_name: contact.firstName,
+      last_name: contact.lastName,
+      email: contact.email,
+      phone_number: contact.phone,
+    });
+  } catch (err) {
+    console.error("Paymob payment key creation failed:", err);
+    return NextResponse.json(
+      { error: "Payment provider is unavailable right now. Please try again shortly." },
+      { status: 502 }
+    );
+  }
 
   return NextResponse.json({ url: getIframeUrl(paymentToken) });
 }
