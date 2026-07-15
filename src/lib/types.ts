@@ -13,6 +13,13 @@ export type Product = {
   created_at: string;
 };
 
+export type Profile = {
+  id: string;
+  full_name: string | null;
+  is_admin: boolean;
+  created_at: string;
+};
+
 export type Order = {
   id: string;
   user_id: string | null;

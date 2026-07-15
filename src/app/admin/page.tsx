@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { formatPrice } from "@/lib/format";
 import type { Order, Profile } from "@/lib/types";
 
-export default async function AccountPage() {
+export default async function AdminOrdersPage() {
   const supabase = await createClient();
   const {
     data: { user },
@@ -20,33 +21,27 @@ export default async function AccountPage() {
     .eq("id", user.id)
     .maybeSingle<Profile>();
 
-  const { data: orders } = await supabase
+  if (!profile?.is_admin) {
+    redirect("/account");
+  }
+
+  const admin = createAdminClient();
+  const { data: orders } = await admin
     .from("orders")
     .select("*")
     .order("created_at", { ascending: false })
     .returns<Order[]>();
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-12">
-      <h1 className="mb-2 text-2xl font-bold">Your account</h1>
-      <p className={profile?.is_admin ? "mb-2 text-neutral-400" : "mb-8 text-neutral-400"}>
-        {user.email}
-      </p>
-      {profile?.is_admin && (
-        <p className="mb-8">
-          <Link href="/admin" className="text-sm underline">
-            View all orders (admin)
-          </Link>
-        </p>
-      )}
+    <div className="mx-auto max-w-4xl px-4 py-12">
+      <h1 className="mb-8 text-2xl font-bold">Orders</h1>
 
-      <h2 className="mb-4 text-lg font-semibold">Order history</h2>
       {orders && orders.length > 0 ? (
         <ul className="divide-y divide-neutral-800 rounded-lg border border-neutral-800">
           {orders.map((order) => (
             <li key={order.id}>
               <Link
-                href={`/account/orders/${order.id}`}
+                href={`/admin/orders/${order.id}`}
                 className="flex items-center justify-between px-4 py-4 hover:bg-neutral-900"
               >
                 <div>
@@ -55,6 +50,7 @@ export default async function AccountPage() {
                   </p>
                   <p className="text-sm text-neutral-400">
                     {new Date(order.created_at).toLocaleDateString()} ·{" "}
+                    {order.email ?? "no email"} ·{" "}
                     <span className="capitalize">{order.status}</span>
                   </p>
                 </div>
@@ -66,13 +62,7 @@ export default async function AccountPage() {
           ))}
         </ul>
       ) : (
-        <p className="text-neutral-400">
-          No orders yet.{" "}
-          <Link href="/shop" className="underline">
-            Start shopping
-          </Link>
-          .
-        </p>
+        <p className="text-neutral-400">No orders yet.</p>
       )}
     </div>
   );
