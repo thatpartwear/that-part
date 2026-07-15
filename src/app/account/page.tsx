@@ -76,7 +76,7 @@ export default async function AccountPage() {
         </p>
       )}
 
-      <DeleteAccountButton />
+      <DeleteAccountButton email={user.email!} />
     </div>
   );
 }
