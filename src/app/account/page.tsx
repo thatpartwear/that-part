@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { formatPrice } from "@/lib/format";
+import { DeleteAccountButton } from "@/components/DeleteAccountButton";
 import type { Order, Profile } from "@/lib/types";
 
 export default async function AccountPage() {
@@ -74,6 +75,8 @@ export default async function AccountPage() {
           .
         </p>
       )}
+
+      <DeleteAccountButton />
     </div>
   );
 }
