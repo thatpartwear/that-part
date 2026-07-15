@@ -115,7 +115,7 @@ export function DeleteAccountButton({ email }: { email: string }) {
   return (
     <div className="mt-12 border-t border-neutral-800 pt-6">
       <p className="mb-3 text-sm text-neutral-300">
-        Enter the 6-digit code sent to <strong>{email}</strong> to permanently
+        Enter the 8-digit code sent to <strong>{email}</strong> to permanently
         delete your account.
       </p>
       {error && <p className="mb-3 text-sm text-red-400">{error}</p>}
@@ -124,16 +124,16 @@ export function DeleteAccountButton({ email }: { email: string }) {
           type="text"
           inputMode="numeric"
           autoComplete="one-time-code"
-          maxLength={6}
+          maxLength={8}
           value={code}
           onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
-          placeholder="123456"
-          className="w-32 rounded-md border border-neutral-700 bg-transparent px-3 py-2 text-sm tracking-widest text-white"
+          placeholder="12345678"
+          className="w-36 rounded-md border border-neutral-700 bg-transparent px-3 py-2 text-sm tracking-widest text-white"
         />
         <button
           type="button"
           onClick={handleConfirm}
-          disabled={loading || code.length !== 6}
+          disabled={loading || code.length !== 8}
           className="rounded-md bg-red-500 px-4 py-2 text-sm font-medium text-white disabled:bg-neutral-700"
         >
           {loading ? "Deleting…" : "Confirm & delete"}
