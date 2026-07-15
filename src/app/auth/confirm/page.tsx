@@ -23,6 +23,23 @@ function AuthConfirmInner() {
     async function run() {
       const supabase = createClient();
 
+      // @supabase/ssr's browser client is built around cookie/PKCE sessions
+      // and doesn't auto-process an implicit-flow hash fragment the way
+      // plain supabase-js does, so parse it ourselves.
+      const hashParams = new URLSearchParams(window.location.hash.slice(1));
+      const access_token = hashParams.get("access_token");
+      const refresh_token = hashParams.get("refresh_token");
+      if (access_token && refresh_token) {
+        const { error } = await supabase.auth.setSession({
+          access_token,
+          refresh_token,
+        });
+        if (!error) {
+          router.replace(next);
+          return;
+        }
+      }
+
       const {
         data: { session },
       } = await supabase.auth.getSession();
