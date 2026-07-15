@@ -20,13 +20,14 @@ export async function Navbar() {
           THAT PART
         </Link>
         <nav className="flex items-center gap-6 text-sm font-medium">
-          <Link href="/shop" className="hover:text-neutral-500">
-            Shop
-          </Link>
           <Suspense fallback={<SearchIcon className="h-5 w-5" />}>
             <SearchBox />
           </Suspense>
-          <Link href="/cart" className="hover:text-neutral-500">
+          <Link
+            href="/cart"
+            aria-label="Cart"
+            className="flex items-center hover:text-neutral-500"
+          >
             <CartCount />
           </Link>
           {user ? (
@@ -34,14 +35,18 @@ export async function Navbar() {
               <Link
                 href="/account"
                 aria-label="Account"
-                className="hover:text-neutral-500"
+                className="flex items-center hover:text-neutral-500"
               >
                 <UserIcon className="h-5 w-5" />
               </Link>
               <SignOutButton />
             </>
           ) : (
-            <Link href="/login" aria-label="Sign in" className="hover:text-neutral-500">
+            <Link
+              href="/login"
+              aria-label="Sign in"
+              className="flex items-center hover:text-neutral-500"
+            >
               <UserIcon className="h-5 w-5" />
             </Link>
           )}
