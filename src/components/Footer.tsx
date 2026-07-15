@@ -31,24 +31,26 @@ const columns = [
 
 export function Footer() {
   return (
-    <footer className="mt-auto border-t border-neutral-200">
+    <footer className="mt-auto border-t border-neutral-800">
       <div className="mx-auto max-w-6xl px-4 py-12">
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
           <div>
-            <p className="text-lg font-bold tracking-tight">THAT PART</p>
-            <p className="mt-2 text-sm text-neutral-500">
+            <p className="text-lg font-bold tracking-tight text-white">
+              THAT PART
+            </p>
+            <p className="mt-2 text-sm text-neutral-400">
               Performance sportswear for every workout.
             </p>
           </div>
           {columns.map((column) => (
             <div key={column.title}>
-              <p className="text-sm font-semibold">{column.title}</p>
+              <p className="text-sm font-semibold text-white">{column.title}</p>
               <ul className="mt-3 space-y-2">
                 {column.links.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-neutral-500 hover:text-black"
+                      className="text-sm text-neutral-400 hover:text-white"
                     >
                       {link.label}
                     </Link>
@@ -59,13 +61,13 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="mt-10 flex flex-col gap-4 border-t border-neutral-200 pt-6 text-sm text-neutral-500 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 flex flex-col gap-4 border-t border-neutral-800 pt-6 text-sm text-neutral-400 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} THAT PART. All rights reserved.</p>
           <div className="flex gap-4">
-            <Link href="/terms" className="hover:text-black">
+            <Link href="/terms" className="hover:text-white">
               Terms of Service
             </Link>
-            <Link href="/privacy" className="hover:text-black">
+            <Link href="/privacy" className="hover:text-white">
               Privacy Policy
             </Link>
           </div>

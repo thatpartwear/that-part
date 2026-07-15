@@ -34,7 +34,7 @@ export default function FAQPage() {
         {faqs.map((faq) => (
           <div key={faq.question}>
             <dt className="font-medium">{faq.question}</dt>
-            <dd className="mt-1 text-sm text-neutral-600">{faq.answer}</dd>
+            <dd className="mt-1 text-sm text-neutral-400">{faq.answer}</dd>
           </div>
         ))}
       </dl>

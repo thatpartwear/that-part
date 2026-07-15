@@ -7,7 +7,7 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <Link href={`/products/${product.slug}`} className="group block">
-      <div className="aspect-square overflow-hidden rounded-lg bg-neutral-100">
+      <div className="aspect-square overflow-hidden rounded-lg bg-neutral-900">
         {image ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -16,14 +16,14 @@ export function ProductCard({ product }: { product: Product }) {
             className="h-full w-full object-cover transition group-hover:scale-105"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center text-neutral-400">
+          <div className="flex h-full w-full items-center justify-center text-neutral-500">
             No image
           </div>
         )}
       </div>
       <div className="mt-3 flex items-center justify-between text-sm">
-        <span className="font-medium">{product.name}</span>
-        <span className="text-neutral-600">
+        <span className="font-medium text-white">{product.name}</span>
+        <span className="text-neutral-400">
           {formatPrice(product.price_cents)}
         </span>
       </div>

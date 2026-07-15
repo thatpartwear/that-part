@@ -19,7 +19,7 @@ export default async function CheckoutSuccessPage({
       <h1 className="text-2xl font-bold">
         {paid ? "Thank you for your order!" : "Payment not completed"}
       </h1>
-      <p className="mt-4 text-neutral-600">
+      <p className="mt-4 text-neutral-400">
         {paid
           ? "Your payment was received. A confirmation will follow shortly."
           : "Your payment didn't go through. Your cart is still saved — you can try again."}
@@ -28,21 +28,21 @@ export default async function CheckoutSuccessPage({
         {paid ? (
           <Link
             href="/account"
-            className="rounded-md bg-black px-6 py-3 text-sm font-medium text-white"
+            className="rounded-md bg-white px-6 py-3 text-sm font-medium text-black"
           >
             View orders
           </Link>
         ) : (
           <Link
             href="/cart"
-            className="rounded-md bg-black px-6 py-3 text-sm font-medium text-white"
+            className="rounded-md bg-white px-6 py-3 text-sm font-medium text-black"
           >
             Back to cart
           </Link>
         )}
         <Link
           href="/shop"
-          className="rounded-md border border-neutral-300 px-6 py-3 text-sm font-medium"
+          className="rounded-md border border-neutral-700 px-6 py-3 text-sm font-medium"
         >
           Continue shopping
         </Link>

@@ -56,8 +56,8 @@ export function AddToCartForm({
                 aria-pressed={size === s}
                 className={`min-w-11 rounded-md border px-3 py-2 text-sm font-medium ${
                   size === s
-                    ? "border-black bg-black text-white"
-                    : "border-neutral-300 hover:border-black"
+                    ? "border-white bg-white text-black"
+                    : "border-neutral-700 text-white hover:border-white"
                 }`}
               >
                 {s}
@@ -82,8 +82,8 @@ export function AddToCartForm({
                 aria-pressed={color === c}
                 className={`rounded-md border px-3 py-2 text-sm font-medium ${
                   color === c
-                    ? "border-black bg-black text-white"
-                    : "border-neutral-300 hover:border-black"
+                    ? "border-white bg-white text-black"
+                    : "border-neutral-700 text-white hover:border-white"
                 }`}
               >
                 {c}
@@ -95,7 +95,7 @@ export function AddToCartForm({
 
       <div>
         <label className="mb-1 block text-sm font-medium">Quantity</label>
-        <div className="inline-flex items-center rounded-md border border-neutral-300">
+        <div className="inline-flex items-center rounded-md border border-neutral-700">
           <button
             type="button"
             onClick={() => {
@@ -103,12 +103,12 @@ export function AddToCartForm({
               setAdded(false);
             }}
             disabled={quantity <= 1}
-            className="px-3 py-2 text-sm font-medium disabled:cursor-not-allowed disabled:text-neutral-300"
+            className="px-3 py-2 text-sm font-medium text-white disabled:cursor-not-allowed disabled:text-neutral-600"
             aria-label="Decrease quantity"
           >
             −
           </button>
-          <span className="w-10 text-center text-sm">{quantity}</span>
+          <span className="w-10 text-center text-sm text-white">{quantity}</span>
           <button
             type="button"
             onClick={() => {
@@ -116,7 +116,7 @@ export function AddToCartForm({
               setAdded(false);
             }}
             disabled={quantity >= product.stock}
-            className="px-3 py-2 text-sm font-medium disabled:cursor-not-allowed disabled:text-neutral-300"
+            className="px-3 py-2 text-sm font-medium text-white disabled:cursor-not-allowed disabled:text-neutral-600"
             aria-label="Increase quantity"
           >
             +
@@ -127,7 +127,7 @@ export function AddToCartForm({
       <button
         type="submit"
         disabled={outOfStock}
-        className="rounded-md bg-black px-6 py-3 text-sm font-medium text-white disabled:cursor-not-allowed disabled:bg-neutral-300"
+        className="rounded-md bg-white px-6 py-3 text-sm font-medium text-black disabled:cursor-not-allowed disabled:bg-neutral-700 disabled:text-neutral-400"
       >
         {outOfStock ? "Out of stock" : added ? "Added ✓" : "Add to cart"}
       </button>

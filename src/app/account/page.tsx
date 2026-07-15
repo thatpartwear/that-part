@@ -23,22 +23,22 @@ export default async function AccountPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12">
       <h1 className="mb-2 text-2xl font-bold">Your account</h1>
-      <p className="mb-8 text-neutral-600">{user.email}</p>
+      <p className="mb-8 text-neutral-400">{user.email}</p>
 
       <h2 className="mb-4 text-lg font-semibold">Order history</h2>
       {orders && orders.length > 0 ? (
-        <ul className="divide-y divide-neutral-200 rounded-lg border border-neutral-200">
+        <ul className="divide-y divide-neutral-800 rounded-lg border border-neutral-800">
           {orders.map((order) => (
             <li key={order.id}>
               <Link
                 href={`/account/orders/${order.id}`}
-                className="flex items-center justify-between px-4 py-4 hover:bg-neutral-50"
+                className="flex items-center justify-between px-4 py-4 hover:bg-neutral-900"
               >
                 <div>
                   <p className="font-medium">
                     Order #{order.id.slice(0, 8)}
                   </p>
-                  <p className="text-sm text-neutral-500">
+                  <p className="text-sm text-neutral-400">
                     {new Date(order.created_at).toLocaleDateString()} ·{" "}
                     <span className="capitalize">{order.status}</span>
                   </p>
@@ -51,7 +51,7 @@ export default async function AccountPage() {
           ))}
         </ul>
       ) : (
-        <p className="text-neutral-500">
+        <p className="text-neutral-400">
           No orders yet.{" "}
           <Link href="/shop" className="underline">
             Start shopping

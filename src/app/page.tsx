@@ -21,7 +21,7 @@ export default async function HomePage() {
   return (
     <div>
       <section
-        className="relative border-b border-neutral-200 bg-cover bg-center"
+        className="relative border-b border-neutral-800 bg-cover bg-center"
         style={{ backgroundImage: "url(/hero/hero-1.png)" }}
       >
         <div className="absolute inset-0 bg-black/50" />
@@ -43,7 +43,7 @@ export default async function HomePage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-16">
-        <h2 className="mb-8 text-xl font-semibold">New arrivals</h2>
+        <h2 className="mb-8 text-xl font-semibold text-white">New arrivals</h2>
         {products && products.length > 0 ? (
           <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
             {products.map((product) => (
@@ -51,7 +51,7 @@ export default async function HomePage() {
             ))}
           </div>
         ) : (
-          <p className="text-neutral-500">
+          <p className="text-neutral-400">
             No products yet — seed the catalog to see items here.
           </p>
         )}

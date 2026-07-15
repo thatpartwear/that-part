@@ -35,7 +35,7 @@ export default async function ShopPage({
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
-      <h1 className="mb-6 text-2xl font-bold">
+      <h1 className="mb-6 text-2xl font-bold text-white">
         {q ? `Search results for "${q}"` : "Shop"}
       </h1>
 
@@ -45,8 +45,8 @@ export default async function ShopPage({
             href="/shop"
             className={`rounded-full border px-4 py-1.5 ${
               !category
-                ? "border-black bg-black text-white"
-                : "border-neutral-300"
+                ? "border-white bg-white text-black"
+                : "border-neutral-700 text-white"
             }`}
           >
             All
@@ -57,8 +57,8 @@ export default async function ShopPage({
               href={`/shop?category=${encodeURIComponent(c)}`}
               className={`rounded-full border px-4 py-1.5 capitalize ${
                 category === c
-                  ? "border-black bg-black text-white"
-                  : "border-neutral-300"
+                  ? "border-white bg-white text-black"
+                  : "border-neutral-700 text-white"
               }`}
             >
               {c}
@@ -74,7 +74,7 @@ export default async function ShopPage({
           ))}
         </div>
       ) : (
-        <p className="text-neutral-500">
+        <p className="text-neutral-400">
           No products found
           {category ? ` in "${category}"` : ""}
           {q ? ` for "${q}"` : ""}.

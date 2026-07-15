@@ -2,11 +2,11 @@ export default function PrivacyPage() {
   return (
     <div className="mx-auto max-w-2xl px-4 py-16">
       <h1 className="mb-2 text-2xl font-bold">Privacy Policy</h1>
-      <p className="mb-8 text-sm text-neutral-500">Last updated: July 2026</p>
+      <p className="mb-8 text-sm text-neutral-400">Last updated: July 2026</p>
 
-      <div className="space-y-8 text-sm text-neutral-600">
+      <div className="space-y-8 text-sm text-neutral-400">
         <section>
-          <h2 className="mb-2 text-base font-semibold text-black">
+          <h2 className="mb-2 text-base font-semibold text-white">
             1. What we collect
           </h2>
           <p>
@@ -17,7 +17,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="mb-2 text-base font-semibold text-black">
+          <h2 className="mb-2 text-base font-semibold text-white">
             2. How we use it
           </h2>
           <p>
@@ -28,7 +28,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="mb-2 text-base font-semibold text-black">
+          <h2 className="mb-2 text-base font-semibold text-white">
             3. Payment information
           </h2>
           <p>
@@ -39,7 +39,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="mb-2 text-base font-semibold text-black">
+          <h2 className="mb-2 text-base font-semibold text-white">
             4. Service providers
           </h2>
           <p>
@@ -50,7 +50,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="mb-2 text-base font-semibold text-black">
+          <h2 className="mb-2 text-base font-semibold text-white">
             5. Cookies and local storage
           </h2>
           <p>
@@ -61,7 +61,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="mb-2 text-base font-semibold text-black">
+          <h2 className="mb-2 text-base font-semibold text-white">
             6. Your rights
           </h2>
           <p>
@@ -72,7 +72,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="mb-2 text-base font-semibold text-black">
+          <h2 className="mb-2 text-base font-semibold text-white">
             7. Contact
           </h2>
           <p>

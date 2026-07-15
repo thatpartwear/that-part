@@ -28,7 +28,7 @@ export function SearchBox() {
         type="button"
         onClick={() => setOpen(true)}
         aria-label="Search"
-        className="flex items-center hover:text-neutral-500"
+        className="flex items-center hover:text-neutral-300"
       >
         <SearchIcon className="h-5 w-5" />
       </button>
@@ -47,7 +47,7 @@ export function SearchBox() {
           if (!query.trim()) setOpen(false);
         }}
         placeholder="Search products…"
-        className="w-32 border-b border-neutral-300 bg-transparent py-1 text-sm outline-none focus:border-black sm:w-48"
+        className="w-32 border-b border-neutral-700 bg-transparent py-1 text-sm text-white outline-none placeholder:text-neutral-500 focus:border-white sm:w-48"
       />
     </form>
   );
