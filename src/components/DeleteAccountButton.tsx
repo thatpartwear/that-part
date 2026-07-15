@@ -24,7 +24,11 @@ export function DeleteAccountButton({ email }: { email: string }) {
     });
 
     if (error) {
-      setError(error.message);
+      setError(
+        error.message.toLowerCase().includes("rate limit")
+          ? "Too many emails sent recently — please wait a while and try again."
+          : error.message
+      );
       setLoading(false);
       return;
     }
@@ -86,8 +90,8 @@ export function DeleteAccountButton({ email }: { email: string }) {
           can&apos;t be undone.
         </p>
         <p className="mb-3 text-sm text-neutral-400">
-          We&apos;ll email a verification code to <strong>{email}</strong> to
-          confirm it&apos;s really you.
+          We&apos;ll email a verification code to <strong>{email}</strong>{" "}
+          to confirm it&apos;s really you.
         </p>
         {error && <p className="mb-3 text-sm text-red-400">{error}</p>}
         <div className="flex gap-3">
@@ -115,8 +119,8 @@ export function DeleteAccountButton({ email }: { email: string }) {
   return (
     <div className="mt-12 border-t border-neutral-800 pt-6">
       <p className="mb-3 text-sm text-neutral-300">
-        Enter the 8-digit code sent to <strong>{email}</strong> to permanently
-        delete your account.
+        Enter the 8-digit code sent to <strong>{email}</strong>{" "}
+        to permanently delete your account.
       </p>
       {error && <p className="mb-3 text-sm text-red-400">{error}</p>}
       <div className="flex flex-wrap items-center gap-3">
