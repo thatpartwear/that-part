@@ -48,6 +48,18 @@
     "stock": 50
   },
   {
+    "slug": "flex-tank",
+    "name": "Flex",
+    "description": "Cotton tank top, lightweight and breathable for training or off days.",
+    "price_cents": 35000,
+    "category": "tank-tops",
+    "images": ["/products/flex-black.png"],
+    "color_images": { "Black": "/products/flex-black.png" },
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["Black", "White", "Silver", "Gold", "Burgundy", "Navy Blue", "Dark Green"],
+    "stock": 50
+  },
+  {
     "slug": "utility-sweatpants",
     "name": "Utility",
     "description": "Heavyweight sweatpants for warmup, recovery, or everyday wear.",

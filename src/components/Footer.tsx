@@ -9,6 +9,7 @@ const columns = [
       { label: "Quarter-Zips", href: "/shop?category=quarter-zips" },
       { label: "Shorts", href: "/shop?category=shorts" },
       { label: "Sweatpants", href: "/shop?category=sweatpants" },
+      { label: "Tank Tops", href: "/shop?category=tank-tops" },
     ],
   },
   {
