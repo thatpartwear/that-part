@@ -36,6 +36,18 @@
     "stock": 50
   },
   {
+    "slug": "apex-quarter-zip",
+    "name": "Apex",
+    "description": "Polyester quarter-zip pullover, built for layering on cooler days.",
+    "price_cents": 55000,
+    "category": "quarter-zips",
+    "images": ["/products/apex-black.png"],
+    "color_images": { "Black": "/products/apex-black.png" },
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["Black", "White", "Silver", "Gold", "Burgundy", "Navy Blue", "Dark Green"],
+    "stock": 50
+  },
+  {
     "slug": "utility-sweatpants",
     "name": "Utility",
     "description": "Heavyweight sweatpants for warmup, recovery, or everyday wear.",
