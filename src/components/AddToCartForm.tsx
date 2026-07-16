@@ -47,8 +47,6 @@ export function AddToCartForm({
             <label className="text-sm font-medium">Size</label>
             <a
               href="/size-guide"
-              target="_blank"
-              rel="noopener noreferrer"
               className="text-sm text-neutral-400 underline hover:text-white"
             >
               Size guide
