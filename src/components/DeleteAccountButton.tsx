@@ -1,26 +1,26 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
-type Step = "idle" | "confirm" | "code-sent";
+type Step = "idle" | "confirm" | "sent";
 
 export function DeleteAccountButton({ email }: { email: string }) {
   const [step, setStep] = useState<Step>("idle");
-  const [code, setCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
 
-  async function handleSendCode() {
+  async function handleSendLink() {
     setLoading(true);
     setError(null);
 
     const supabase = createClient();
     const { error } = await supabase.auth.signInWithOtp({
       email,
-      options: { shouldCreateUser: false },
+      options: {
+        shouldCreateUser: false,
+        emailRedirectTo: `${window.location.origin}/auth/confirm?next=/account/confirm-delete`,
+      },
     });
 
     if (error) {
@@ -33,38 +33,8 @@ export function DeleteAccountButton({ email }: { email: string }) {
       return;
     }
 
-    setStep("code-sent");
+    setStep("sent");
     setLoading(false);
-  }
-
-  async function handleConfirm() {
-    setLoading(true);
-    setError(null);
-
-    const supabase = createClient();
-    const { error: verifyError } = await supabase.auth.verifyOtp({
-      email,
-      token: code,
-      type: "email",
-    });
-
-    if (verifyError) {
-      setError("That code is invalid or expired. Try again.");
-      setLoading(false);
-      return;
-    }
-
-    const res = await fetch("/api/account/delete", { method: "POST" });
-    if (!res.ok) {
-      const data = await res.json().catch(() => ({}));
-      setError(data.error ?? "Failed to delete account");
-      setLoading(false);
-      return;
-    }
-
-    await supabase.auth.signOut();
-    router.push("/");
-    router.refresh();
   }
 
   if (step === "idle") {
@@ -81,37 +51,13 @@ export function DeleteAccountButton({ email }: { email: string }) {
     );
   }
 
-  if (step === "confirm") {
+  if (step === "sent") {
     return (
       <div className="mt-12 border-t border-neutral-800 pt-6">
-        <p className="mb-3 text-sm text-neutral-300">
-          This permanently deletes your account and profile. Past orders are
-          kept for our records but will no longer be linked to you. This
-          can&apos;t be undone.
+        <p className="text-sm text-neutral-300">
+          Check your inbox at <strong>{email}</strong> and click the link to
+          finish deleting your account.
         </p>
-        <p className="mb-3 text-sm text-neutral-400">
-          We&apos;ll email a verification code to <strong>{email}</strong>{" "}
-          to confirm it&apos;s really you.
-        </p>
-        {error && <p className="mb-3 text-sm text-red-400">{error}</p>}
-        <div className="flex gap-3">
-          <button
-            type="button"
-            onClick={handleSendCode}
-            disabled={loading}
-            className="rounded-md bg-red-500 px-4 py-2 text-sm font-medium text-white disabled:bg-neutral-700"
-          >
-            {loading ? "Sending code…" : "Send verification code"}
-          </button>
-          <button
-            type="button"
-            onClick={() => setStep("idle")}
-            disabled={loading}
-            className="rounded-md border border-neutral-700 px-4 py-2 text-sm font-medium"
-          >
-            Cancel
-          </button>
-        </div>
       </div>
     );
   }
@@ -119,28 +65,23 @@ export function DeleteAccountButton({ email }: { email: string }) {
   return (
     <div className="mt-12 border-t border-neutral-800 pt-6">
       <p className="mb-3 text-sm text-neutral-300">
-        Enter the 8-digit code sent to <strong>{email}</strong>{" "}
-        to permanently delete your account.
+        This permanently deletes your account and profile. Past orders are
+        kept for our records but will no longer be linked to you. This
+        can&apos;t be undone.
+      </p>
+      <p className="mb-3 text-sm text-neutral-400">
+        We&apos;ll email a confirmation link to <strong>{email}</strong>{" "}
+        to verify it&apos;s really you before deleting anything.
       </p>
       {error && <p className="mb-3 text-sm text-red-400">{error}</p>}
-      <div className="flex flex-wrap items-center gap-3">
-        <input
-          type="text"
-          inputMode="numeric"
-          autoComplete="one-time-code"
-          maxLength={8}
-          value={code}
-          onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
-          placeholder="12345678"
-          className="w-36 rounded-md border border-neutral-700 bg-transparent px-3 py-2 text-sm tracking-widest text-white"
-        />
+      <div className="flex gap-3">
         <button
           type="button"
-          onClick={handleConfirm}
-          disabled={loading || code.length !== 8}
+          onClick={handleSendLink}
+          disabled={loading}
           className="rounded-md bg-red-500 px-4 py-2 text-sm font-medium text-white disabled:bg-neutral-700"
         >
-          {loading ? "Deleting…" : "Confirm & delete"}
+          {loading ? "Sending…" : "Send confirmation link"}
         </button>
         <button
           type="button"
@@ -151,14 +92,6 @@ export function DeleteAccountButton({ email }: { email: string }) {
           Cancel
         </button>
       </div>
-      <button
-        type="button"
-        onClick={handleSendCode}
-        disabled={loading}
-        className="mt-3 text-sm text-neutral-400 underline hover:text-white"
-      >
-        Resend code
-      </button>
     </div>
   );
 }
