@@ -3,6 +3,35 @@ import { createClient } from "@/lib/supabase/server";
 import { ProductCard } from "@/components/ProductCard";
 import type { Product } from "@/lib/types";
 
+const collections = [
+  { label: "T-Shirts", category: "t-shirts", image: "/products/core-black.png" },
+  { label: "Quarter-Zips", category: "quarter-zips", image: "/products/apex-black.png" },
+  { label: "Shorts", category: "shorts", image: "/products/motion-black.png" },
+  { label: "Pants", category: "sweatpants", image: "/products/utility-black.png" },
+  { label: "Tank Tops", category: "tank-tops", image: "/products/flex-black.png" },
+];
+
+const reviews = [
+  {
+    name: "Ahmed S.",
+    rating: 5,
+    quote:
+      "Placeholder review — great fit and the material holds up after a lot of washes.",
+  },
+  {
+    name: "Mariam K.",
+    rating: 5,
+    quote:
+      "Placeholder review — ordered the Core tee and it's now in my regular rotation.",
+  },
+  {
+    name: "Youssef R.",
+    rating: 4,
+    quote:
+      "Placeholder review — comfortable for training, true to size.",
+  },
+];
+
 export default async function HomePage() {
   const supabase = await createClient();
   let products: Product[] | null = null;
@@ -55,6 +84,60 @@ export default async function HomePage() {
             No products yet — seed the catalog to see items here.
           </p>
         )}
+      </section>
+
+      <section className="border-t border-neutral-800 px-4 py-16">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="mb-8 text-xl font-semibold text-white">
+            Shop by collection
+          </h2>
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+            {collections.map((collection) => (
+              <Link
+                key={collection.category}
+                href={`/shop?category=${collection.category}`}
+                className="group"
+              >
+                <div className="aspect-square overflow-hidden rounded-lg bg-neutral-900">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={collection.image}
+                    alt={collection.label}
+                    className="h-full w-full object-cover transition group-hover:scale-105"
+                  />
+                </div>
+                <p className="mt-3 text-center text-sm font-medium">
+                  {collection.label}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-neutral-800 px-4 py-16">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="mb-8 text-xl font-semibold text-white">
+            Customer reviews
+          </h2>
+          <div className="grid gap-6 sm:grid-cols-3">
+            {reviews.map((review) => (
+              <div
+                key={review.name}
+                className="rounded-lg border border-neutral-800 p-5"
+              >
+                <div className="mb-2 text-white">
+                  {"★".repeat(review.rating)}
+                  <span className="text-neutral-700">
+                    {"★".repeat(5 - review.rating)}
+                  </span>
+                </div>
+                <p className="text-sm text-neutral-300">{review.quote}</p>
+                <p className="mt-3 text-sm font-medium">{review.name}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
     </div>
   );
