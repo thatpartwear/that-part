@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { formatPrice } from "@/lib/format";
 import { DeleteAccountButton } from "@/components/DeleteAccountButton";
+import { MarketingOptInToggle } from "@/components/MarketingOptInToggle";
 import type { Order, Profile } from "@/lib/types";
 
 export default async function AccountPage() {
@@ -40,6 +41,13 @@ export default async function AccountPage() {
           </Link>
         </p>
       )}
+
+      <div className="mb-8">
+        <MarketingOptInToggle
+          userId={user.id}
+          initialValue={profile?.marketing_opt_in ?? false}
+        />
+      </div>
 
       <h2 className="mb-4 text-lg font-semibold">Order history</h2>
       {orders && orders.length > 0 ? (

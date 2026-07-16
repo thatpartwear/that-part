@@ -5,6 +5,7 @@ create table if not exists public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,
   full_name text,
   is_admin boolean not null default false,
+  marketing_opt_in boolean not null default false,
   created_at timestamptz not null default now()
 );
 
@@ -12,8 +13,12 @@ create table if not exists public.profiles (
 create or replace function public.handle_new_user()
 returns trigger as $$
 begin
-  insert into public.profiles (id, full_name)
-  values (new.id, new.raw_user_meta_data->>'full_name');
+  insert into public.profiles (id, full_name, marketing_opt_in)
+  values (
+    new.id,
+    new.raw_user_meta_data->>'full_name',
+    coalesce((new.raw_user_meta_data->>'marketing_opt_in')::boolean, false)
+  );
   return new;
 end;
 $$ language plpgsql security definer set search_path = public;
@@ -46,6 +51,8 @@ create table if not exists public.orders (
   paymob_order_id text unique,
   status text not null default 'pending',
   total_cents integer not null check (total_cents >= 0),
+  discount_cents integer not null default 0,
+  shipping_cents integer not null default 0,
   email text,
   shipping_address jsonb,
   created_at timestamptz not null default now()

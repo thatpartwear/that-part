@@ -8,6 +8,7 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
+  const [marketingOptIn, setMarketingOptIn] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [confirmationSent, setConfirmationSent] = useState(false);
@@ -39,7 +40,7 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
       email,
       password,
       options: {
-        data: { full_name: fullName },
+        data: { full_name: fullName, marketing_opt_in: marketingOptIn },
         emailRedirectTo: `${window.location.origin}/auth/confirm?next=/account`,
       },
     });
@@ -104,6 +105,21 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
           className="w-full rounded-md border border-neutral-700 bg-transparent px-3 py-2 text-sm text-white"
         />
       </div>
+
+      {mode === "signup" && (
+        <label className="flex items-start gap-2 text-sm text-neutral-300">
+          <input
+            type="checkbox"
+            checked={marketingOptIn}
+            onChange={(e) => setMarketingOptIn(e.target.checked)}
+            className="mt-0.5"
+          />
+          <span>
+            Email me about new arrivals and offers — get 5% off as a thank
+            you.
+          </span>
+        </label>
+      )}
 
       {error && <p className="text-sm text-red-400">{error}</p>}
 

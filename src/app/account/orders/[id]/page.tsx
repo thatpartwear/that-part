@@ -69,11 +69,33 @@ export default async function OrderDetailPage({
         ))}
       </ul>
 
-      <div className="mt-6 flex items-center justify-between border-t border-neutral-800 pt-6">
-        <span className="text-lg font-semibold">Total</span>
-        <span className="text-lg font-semibold">
-          {formatPrice(order.total_cents)}
-        </span>
+      <div className="mt-6 space-y-2 border-t border-neutral-800 pt-6 text-sm">
+        <div className="flex items-center justify-between">
+          <span className="text-neutral-400">Subtotal</span>
+          <span>
+            {formatPrice(
+              order.total_cents + order.discount_cents - order.shipping_cents
+            )}
+          </span>
+        </div>
+        {order.discount_cents > 0 && (
+          <div className="flex items-center justify-between">
+            <span className="text-neutral-400">Discount</span>
+            <span>−{formatPrice(order.discount_cents)}</span>
+          </div>
+        )}
+        <div className="flex items-center justify-between">
+          <span className="text-neutral-400">Shipping</span>
+          <span>
+            {order.shipping_cents > 0
+              ? formatPrice(order.shipping_cents)
+              : "Free"}
+          </span>
+        </div>
+        <div className="flex items-center justify-between border-t border-neutral-800 pt-2 text-lg font-semibold">
+          <span>Total</span>
+          <span>{formatPrice(order.total_cents)}</span>
+        </div>
       </div>
     </div>
   );

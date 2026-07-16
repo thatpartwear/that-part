@@ -17,6 +17,7 @@ export type Profile = {
   id: string;
   full_name: string | null;
   is_admin: boolean;
+  marketing_opt_in: boolean;
   created_at: string;
 };
 
@@ -26,6 +27,8 @@ export type Order = {
   paymob_order_id: string | null;
   status: string;
   total_cents: number;
+  discount_cents: number;
+  shipping_cents: number;
   email: string | null;
   shipping_address: Record<string, unknown> | null;
   created_at: string;

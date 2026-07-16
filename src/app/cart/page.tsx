@@ -5,6 +5,11 @@ import { useEffect, useState } from "react";
 import { useCartStore } from "@/lib/cart-store";
 import { formatPrice } from "@/lib/format";
 import { createClient } from "@/lib/supabase/client";
+import {
+  calculatePricing,
+  DISCOUNT_ORDER_THRESHOLD_CENTS,
+  FREE_SHIPPING_THRESHOLD_CENTS,
+} from "@/lib/pricing";
 
 export default function CartPage() {
   const items = useCartStore((state) => state.items);
@@ -12,6 +17,7 @@ export default function CartPage() {
   const setQuantity = useCartStore((state) => state.setQuantity);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [memberDiscountEligible, setMemberDiscountEligible] = useState(false);
   const [contact, setContact] = useState({
     firstName: "",
     lastName: "",
@@ -21,7 +27,7 @@ export default function CartPage() {
 
   useEffect(() => {
     const supabase = createClient();
-    supabase.auth.getUser().then(({ data }) => {
+    supabase.auth.getUser().then(async ({ data }) => {
       const user = data.user;
       if (!user) return;
       const fullName = (user.user_metadata?.full_name as string) ?? "";
@@ -32,13 +38,25 @@ export default function CartPage() {
         firstName: firstName || c.firstName,
         lastName: rest.join(" ") || c.lastName,
       }));
+
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("marketing_opt_in")
+        .eq("id", user.id)
+        .maybeSingle<{ marketing_opt_in: boolean }>();
+      setMemberDiscountEligible(profile?.marketing_opt_in ?? false);
     });
   }, []);
 
-  const total = items.reduce(
+  const subtotal = items.reduce(
     (sum, item) => sum + item.priceCents * item.quantity,
     0
   );
+
+  const pricing = calculatePricing({
+    subtotalCents: subtotal,
+    isMemberDiscountEligible: memberDiscountEligible,
+  });
 
   async function handleCheckout() {
     setLoading(true);
@@ -154,10 +172,45 @@ export default function CartPage() {
         ))}
       </ul>
 
-      <div className="mt-8 flex items-center justify-between border-t border-neutral-800 pt-6">
-        <span className="text-lg font-semibold">Total</span>
-        <span className="text-lg font-semibold">{formatPrice(total)}</span>
+      <div className="mt-8 space-y-2 border-t border-neutral-800 pt-6 text-sm">
+        <div className="flex items-center justify-between">
+          <span className="text-neutral-400">Subtotal</span>
+          <span>{formatPrice(pricing.subtotalCents)}</span>
+        </div>
+        {pricing.discountCents > 0 && (
+          <div className="flex items-center justify-between">
+            <span className="text-neutral-400">Discount (5%)</span>
+            <span>−{formatPrice(pricing.discountCents)}</span>
+          </div>
+        )}
+        <div className="flex items-center justify-between">
+          <span className="text-neutral-400">Shipping</span>
+          <span>
+            {pricing.freeShipping ? "Free" : formatPrice(pricing.shippingCents)}
+          </span>
+        </div>
+        <div className="flex items-center justify-between border-t border-neutral-800 pt-2 text-lg font-semibold">
+          <span>Total</span>
+          <span>{formatPrice(pricing.totalCents)}</span>
+        </div>
       </div>
+
+      {!pricing.freeShipping && (
+        <p className="mt-3 text-sm text-neutral-400">
+          Add {formatPrice(FREE_SHIPPING_THRESHOLD_CENTS - subtotal)} more to
+          get free shipping.
+        </p>
+      )}
+      {!memberDiscountEligible && !pricing.discountApplied && (
+        <p className="mt-1 text-sm text-neutral-400">
+          <Link href="/account" className="underline">
+            Sign in and opt into emails
+          </Link>{" "}
+          for 5% off, or spend{" "}
+          {formatPrice(DISCOUNT_ORDER_THRESHOLD_CENTS - subtotal)} more to
+          unlock it automatically.
+        </p>
+      )}
 
       <div className="mt-8 border-t border-neutral-800 pt-6">
         <h2 className="mb-4 text-lg font-semibold">Contact details</h2>

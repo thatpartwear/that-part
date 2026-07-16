@@ -7,7 +7,8 @@ import {
   createPaymentKey,
   getIframeUrl,
 } from "@/lib/paymob";
-import type { CartItem, Product } from "@/lib/types";
+import { calculatePricing } from "@/lib/pricing";
+import type { CartItem, Product, Profile } from "@/lib/types";
 
 type Contact = {
   firstName: string;
@@ -46,7 +47,7 @@ export async function POST(request: Request) {
 
   const productsById = new Map((products ?? []).map((p) => [p.id, p]));
 
-  let totalCents = 0;
+  let subtotalCents = 0;
   const paymobItems = [];
   const orderItemRows = [];
 
@@ -65,7 +66,7 @@ export async function POST(request: Request) {
       );
     }
 
-    totalCents += product.price_cents * item.quantity;
+    subtotalCents += product.price_cents * item.quantity;
 
     paymobItems.push({
       name: product.name,
@@ -83,13 +84,37 @@ export async function POST(request: Request) {
     });
   }
 
+  let memberDiscountEligible = false;
+  if (user) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("id", user.id)
+      .maybeSingle<Profile>();
+    memberDiscountEligible = profile?.marketing_opt_in ?? false;
+  }
+
+  const pricing = calculatePricing({
+    subtotalCents,
+    isMemberDiscountEligible: memberDiscountEligible,
+  });
+
+  if (pricing.shippingCents > 0) {
+    paymobItems.push({
+      name: "Shipping",
+      amount_cents: String(pricing.shippingCents),
+      description: "Shipping",
+      quantity: "1",
+    });
+  }
+
   const admin = createAdminClient();
 
   let authToken: string;
   let paymobOrderId: number;
   try {
     authToken = await getAuthToken();
-    paymobOrderId = await createOrder(authToken, totalCents, paymobItems);
+    paymobOrderId = await createOrder(authToken, pricing.totalCents, paymobItems);
   } catch (err) {
     console.error("Paymob order creation failed:", err);
     return NextResponse.json(
@@ -104,7 +129,9 @@ export async function POST(request: Request) {
       user_id: user?.id ?? null,
       paymob_order_id: String(paymobOrderId),
       status: "pending",
-      total_cents: totalCents,
+      total_cents: pricing.totalCents,
+      discount_cents: pricing.discountCents,
+      shipping_cents: pricing.shippingCents,
       email: contact.email,
       shipping_address: contact,
     })
@@ -128,7 +155,7 @@ export async function POST(request: Request) {
 
   let paymentToken: string;
   try {
-    paymentToken = await createPaymentKey(authToken, totalCents, paymobOrderId, {
+    paymentToken = await createPaymentKey(authToken, pricing.totalCents, paymobOrderId, {
       first_name: contact.firstName,
       last_name: contact.lastName,
       email: contact.email,
