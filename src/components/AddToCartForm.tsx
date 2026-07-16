@@ -43,7 +43,17 @@ export function AddToCartForm({
     >
       {product.sizes.length > 0 && (
         <div>
-          <label className="mb-1 block text-sm font-medium">Size</label>
+          <div className="mb-1 flex items-center justify-between">
+            <label className="text-sm font-medium">Size</label>
+            <a
+              href="/size-guide"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-neutral-400 underline hover:text-white"
+            >
+              Size guide
+            </a>
+          </div>
           <div className="flex flex-wrap gap-2">
             {product.sizes.map((s) => (
               <button

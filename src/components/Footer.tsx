@@ -26,6 +26,7 @@ const columns = [
     links: [
       { label: "Contact us", href: "/contact" },
       { label: "FAQ", href: "/faq" },
+      { label: "Size Guide", href: "/size-guide" },
       { label: "Shipping & Returns", href: "/shipping-returns" },
     ],
   },
