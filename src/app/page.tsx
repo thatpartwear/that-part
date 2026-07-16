@@ -35,6 +35,8 @@ const reviews = [
 export default async function HomePage() {
   const supabase = await createClient();
   let products: Product[] | null = null;
+  let memberOptedIn = false;
+  let signedIn = false;
   try {
     const { data } = await supabase
       .from("products")
@@ -43,6 +45,19 @@ export default async function HomePage() {
       .limit(4)
       .returns<Product[]>();
     products = data;
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (user) {
+      signedIn = true;
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("marketing_opt_in")
+        .eq("id", user.id)
+        .maybeSingle<{ marketing_opt_in: boolean }>();
+      memberOptedIn = profile?.marketing_opt_in ?? false;
+    }
   } catch {
     // Supabase not configured yet — show the empty state below.
   }
@@ -68,6 +83,45 @@ export default async function HomePage() {
           >
             Shop now
           </Link>
+        </div>
+      </section>
+
+      <section className="border-b border-neutral-800 px-4 py-8">
+        <div className="mx-auto grid max-w-6xl gap-6 text-center sm:grid-cols-3 sm:text-left">
+          <div>
+            <p className="font-semibold text-white">Free shipping</p>
+            <p className="mt-1 text-sm text-neutral-400">
+              On orders over EGP 1,000.00
+            </p>
+          </div>
+          <div>
+            <p className="font-semibold text-white">5% off bigger orders</p>
+            <p className="mt-1 text-sm text-neutral-400">
+              Automatically applied over EGP 2,000.00
+            </p>
+          </div>
+          <div>
+            <p className="font-semibold text-white">5% off for members</p>
+            <p className="mt-1 text-sm text-neutral-400">
+              {memberOptedIn ? (
+                "You're a member — the discount is applied at checkout."
+              ) : signedIn ? (
+                <>
+                  <Link href="/account" className="underline">
+                    Opt into emails
+                  </Link>{" "}
+                  in your account to unlock it.
+                </>
+              ) : (
+                <>
+                  <Link href="/signup" className="underline">
+                    Sign up
+                  </Link>{" "}
+                  and opt into emails to unlock it.
+                </>
+              )}
+            </p>
+          </div>
         </div>
       </section>
 
