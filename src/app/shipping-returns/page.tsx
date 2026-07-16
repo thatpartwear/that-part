@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function ShippingReturnsPage() {
   return (
     <div className="mx-auto max-w-2xl px-4 py-16">
@@ -17,8 +19,11 @@ export default function ShippingReturnsPage() {
         <h2 className="mb-2 text-lg font-semibold">Returns</h2>
         <p className="text-sm text-neutral-400">
           If something isn&apos;t right, you can return unworn items with
-          tags attached within 14 days of delivery for a refund or exchange.
-          Contact us to start a return.
+          tags attached within 14 days of delivery for a refund or exchange.{" "}
+          <Link href="/contact" className="underline">
+            Contact us
+          </Link>{" "}
+          to start a return.
         </p>
       </section>
     </div>
