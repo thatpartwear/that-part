@@ -54,8 +54,8 @@ export default async function ProductPage({
       <ProductDetail product={product} />
 
       {complementary && complementary.length > 0 && (
-        <div className="mt-16 border-t border-neutral-800 pt-16">
-          <h2 className="mb-8 text-xl font-semibold text-white">
+        <div className="mt-16 border-t border-neutral-200 pt-16">
+          <h2 className="mb-8 text-xl font-semibold">
             Complete your look
           </h2>
           <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">

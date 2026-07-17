@@ -81,7 +81,7 @@ function AuthConfirmInner() {
 
   return (
     <div className="mx-auto max-w-sm px-4 py-16 text-center">
-      <p className="text-sm text-neutral-400">Confirming…</p>
+      <p className="text-sm text-neutral-500">Confirming…</p>
     </div>
   );
 }
@@ -91,7 +91,7 @@ export default function AuthConfirmPage() {
     <Suspense
       fallback={
         <div className="mx-auto max-w-sm px-4 py-16 text-center">
-          <p className="text-sm text-neutral-400">Confirming…</p>
+          <p className="text-sm text-neutral-500">Confirming…</p>
         </div>
       }
     >

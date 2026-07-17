@@ -32,7 +32,7 @@ export default async function SizeGuidePage() {
   return (
     <div className="mx-auto max-w-2xl px-4 py-16">
       <h1 className="mb-2 text-2xl font-bold">Size Guide</h1>
-      <p className="mb-10 text-sm text-neutral-400">
+      <p className="mb-10 text-sm text-neutral-500">
         Measurements coming soon for each item below. If you&apos;re between
         sizes, we recommend sizing up.
       </p>
@@ -44,11 +44,11 @@ export default async function SizeGuidePage() {
             return (
               <div key={product.id}>
                 <h2 className="mb-3 text-lg font-semibold">{product.name}</h2>
-                <div className="overflow-x-auto rounded-lg border border-neutral-800">
+                <div className="overflow-x-auto rounded-lg border border-neutral-200">
                   <table className="w-full text-left text-sm">
                     <thead>
-                      <tr className="border-b border-neutral-800">
-                        <th className="px-4 py-3 font-medium text-neutral-400">
+                      <tr className="border-b border-neutral-200">
+                        <th className="px-4 py-3 font-medium text-neutral-500">
                           Size
                         </th>
                         {sizes.map((size) => (
@@ -62,9 +62,9 @@ export default async function SizeGuidePage() {
                       {measurements.map((measurement) => (
                         <tr
                           key={measurement}
-                          className="border-b border-neutral-800 last:border-0"
+                          className="border-b border-neutral-200 last:border-0"
                         >
-                          <td className="px-4 py-3 text-neutral-400">
+                          <td className="px-4 py-3 text-neutral-500">
                             {measurement}
                           </td>
                           {sizes.map((size) => (
@@ -82,12 +82,15 @@ export default async function SizeGuidePage() {
           })}
         </div>
       ) : (
-        <p className="text-neutral-400">No products yet.</p>
+        <p className="text-neutral-500">No products yet.</p>
       )}
 
-      <p className="mt-10 text-sm text-neutral-400">
+      <p className="mt-10 text-sm text-neutral-500">
         Still not sure what size to get?{" "}
-        <a href="/contact" className="underline">
+        <a
+          href="/contact"
+          className="underline active:font-semibold active:text-black"
+        >
           Contact us
         </a>{" "}
         and we&apos;ll help you out.

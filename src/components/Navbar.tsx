@@ -14,9 +14,9 @@ export async function Navbar() {
     .catch(() => null); // Supabase not configured yet — treat as logged out.
 
   return (
-    <header className="border-b border-neutral-800">
+    <header className="border-b border-neutral-200">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-        <Link href="/" className="text-lg font-bold tracking-tight text-white">
+        <Link href="/" className="text-lg font-bold tracking-tight">
           THAT PART
         </Link>
         <nav className="flex items-center gap-6 text-sm font-medium">
@@ -26,7 +26,7 @@ export async function Navbar() {
           <Link
             href="/cart"
             aria-label="Cart"
-            className="flex items-center hover:text-neutral-300"
+            className="flex items-center hover:text-neutral-500"
           >
             <CartCount />
           </Link>
@@ -35,7 +35,7 @@ export async function Navbar() {
               <Link
                 href="/account"
                 aria-label="Account"
-                className="flex items-center hover:text-neutral-300"
+                className="flex items-center hover:text-neutral-500"
               >
                 <UserIcon className="h-5 w-5" />
               </Link>
@@ -45,7 +45,7 @@ export async function Navbar() {
             <Link
               href="/login"
               aria-label="Sign in"
-              className="flex items-center hover:text-neutral-300"
+              className="flex items-center hover:text-neutral-500"
             >
               <UserIcon className="h-5 w-5" />
             </Link>

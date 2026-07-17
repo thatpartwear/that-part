@@ -37,18 +37,18 @@ export default async function AdminOrdersPage() {
       <h1 className="mb-8 text-2xl font-bold">Orders</h1>
 
       {orders && orders.length > 0 ? (
-        <ul className="divide-y divide-neutral-800 rounded-lg border border-neutral-800">
+        <ul className="divide-y divide-neutral-200 rounded-lg border border-neutral-200">
           {orders.map((order) => (
             <li key={order.id}>
               <Link
                 href={`/admin/orders/${order.id}`}
-                className="flex items-center justify-between px-4 py-4 hover:bg-neutral-900"
+                className="flex items-center justify-between px-4 py-4 hover:bg-neutral-50"
               >
                 <div>
                   <p className="font-medium">
                     Order #{order.id.slice(0, 8)}
                   </p>
-                  <p className="text-sm text-neutral-400">
+                  <p className="text-sm text-neutral-500">
                     {new Date(order.created_at).toLocaleDateString()} ·{" "}
                     {order.email ?? "no email"} ·{" "}
                     <span className="capitalize">{order.status}</span>
@@ -62,7 +62,7 @@ export default async function AdminOrdersPage() {
           ))}
         </ul>
       ) : (
-        <p className="text-neutral-400">No orders yet.</p>
+        <p className="text-neutral-500">No orders yet.</p>
       )}
     </div>
   );

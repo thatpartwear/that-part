@@ -39,11 +39,11 @@ export function DeleteAccountButton({ email }: { email: string }) {
 
   if (step === "idle") {
     return (
-      <div className="mt-12 border-t border-neutral-800 pt-6">
+      <div className="mt-12 border-t border-neutral-200 pt-6">
         <button
           type="button"
           onClick={() => setStep("confirm")}
-          className="text-sm text-red-400 underline hover:text-red-300"
+          className="text-sm text-red-600 underline hover:text-red-500"
         >
           Delete account
         </button>
@@ -53,8 +53,8 @@ export function DeleteAccountButton({ email }: { email: string }) {
 
   if (step === "sent") {
     return (
-      <div className="mt-12 border-t border-neutral-800 pt-6">
-        <p className="text-sm text-neutral-300">
+      <div className="mt-12 border-t border-neutral-200 pt-6">
+        <p className="text-sm text-neutral-600">
           Check your inbox at <strong>{email}</strong> and click the link to
           finish deleting your account.
         </p>
@@ -63,23 +63,23 @@ export function DeleteAccountButton({ email }: { email: string }) {
   }
 
   return (
-    <div className="mt-12 border-t border-neutral-800 pt-6">
-      <p className="mb-3 text-sm text-neutral-300">
+    <div className="mt-12 border-t border-neutral-200 pt-6">
+      <p className="mb-3 text-sm text-neutral-600">
         This permanently deletes your account and profile. Past orders are
         kept for our records but will no longer be linked to you. This
         can&apos;t be undone.
       </p>
-      <p className="mb-3 text-sm text-neutral-400">
+      <p className="mb-3 text-sm text-neutral-500">
         We&apos;ll email a confirmation link to <strong>{email}</strong>{" "}
         to verify it&apos;s really you before deleting anything.
       </p>
-      {error && <p className="mb-3 text-sm text-red-400">{error}</p>}
+      {error && <p className="mb-3 text-sm text-red-600">{error}</p>}
       <div className="flex gap-3">
         <button
           type="button"
           onClick={handleSendLink}
           disabled={loading}
-          className="rounded-md bg-red-500 px-4 py-2 text-sm font-medium text-white disabled:bg-neutral-700"
+          className="rounded-md bg-red-500 px-4 py-2 text-sm font-medium text-white disabled:bg-neutral-300"
         >
           {loading ? "Sending…" : "Send confirmation link"}
         </button>
@@ -87,7 +87,7 @@ export function DeleteAccountButton({ email }: { email: string }) {
           type="button"
           onClick={() => setStep("idle")}
           disabled={loading}
-          className="rounded-md border border-neutral-700 px-4 py-2 text-sm font-medium"
+          className="rounded-md border border-neutral-300 px-4 py-2 text-sm font-medium"
         >
           Cancel
         </button>

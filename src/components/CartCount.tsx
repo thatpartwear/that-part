@@ -11,7 +11,7 @@ export function CartCount() {
     <span className="relative inline-block h-5 w-5" aria-label="Cart">
       <CartIcon className="h-5 w-5" />
       {count > 0 && (
-        <span className="absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-white px-1 text-[10px] font-medium text-black">
+        <span className="absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-black px-1 text-[10px] font-medium text-white">
           {count}
         </span>
       )}

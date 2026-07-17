@@ -2,11 +2,11 @@ export default function TermsPage() {
   return (
     <div className="mx-auto max-w-2xl px-4 py-16">
       <h1 className="mb-2 text-2xl font-bold">Terms of Service</h1>
-      <p className="mb-8 text-sm text-neutral-400">Last updated: July 2026</p>
+      <p className="mb-8 text-sm text-neutral-500">Last updated: July 2026</p>
 
-      <div className="space-y-8 text-sm text-neutral-400">
+      <div className="space-y-8 text-sm text-neutral-600">
         <section>
-          <h2 className="mb-2 text-base font-semibold text-white">
+          <h2 className="mb-2 text-base font-semibold text-black">
             1. About these terms
           </h2>
           <p>
@@ -17,7 +17,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="mb-2 text-base font-semibold text-white">
+          <h2 className="mb-2 text-base font-semibold text-black">
             2. Orders and payment
           </h2>
           <p>
@@ -30,12 +30,15 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="mb-2 text-base font-semibold text-white">
+          <h2 className="mb-2 text-base font-semibold text-black">
             3. Shipping and returns
           </h2>
           <p>
             Shipping timelines and our returns policy are described on our{" "}
-            <a href="/shipping-returns" className="underline">
+            <a
+              href="/shipping-returns"
+              className="underline active:font-semibold active:text-black"
+            >
               Shipping &amp; Returns
             </a>{" "}
             page, which forms part of these terms.
@@ -43,7 +46,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="mb-2 text-base font-semibold text-white">
+          <h2 className="mb-2 text-base font-semibold text-black">
             4. Accounts
           </h2>
           <p>
@@ -54,7 +57,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="mb-2 text-base font-semibold text-white">
+          <h2 className="mb-2 text-base font-semibold text-black">
             5. Acceptable use
           </h2>
           <p>
@@ -65,7 +68,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="mb-2 text-base font-semibold text-white">
+          <h2 className="mb-2 text-base font-semibold text-black">
             6. Limitation of liability
           </h2>
           <p>
@@ -76,7 +79,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="mb-2 text-base font-semibold text-white">
+          <h2 className="mb-2 text-base font-semibold text-black">
             7. Changes to these terms
           </h2>
           <p>
@@ -87,12 +90,15 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="mb-2 text-base font-semibold text-white">
+          <h2 className="mb-2 text-base font-semibold text-black">
             8. Contact
           </h2>
           <p>
             Questions about these terms? Reach us at{" "}
-            <a href="mailto:support@thatpartwear.com" className="underline">
+            <a
+              href="mailto:support@thatpartwear.com"
+              className="underline active:font-semibold active:text-black"
+            >
               support@thatpartwear.com
             </a>
             .

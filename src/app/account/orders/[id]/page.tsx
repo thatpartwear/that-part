@@ -41,23 +41,26 @@ export default async function OrderDetailPage({
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-12">
-      <Link href="/account" className="text-sm text-neutral-400 underline">
+      <Link
+        href="/account"
+        className="text-sm text-neutral-500 underline hover:text-black active:font-semibold active:text-black"
+      >
         ← Back to orders
       </Link>
       <h1 className="mt-4 mb-2 text-2xl font-bold">
         Order #{order.id.slice(0, 8)}
       </h1>
-      <p className="mb-8 text-neutral-400">
+      <p className="mb-8 text-neutral-500">
         Placed {new Date(order.created_at).toLocaleDateString()} ·{" "}
         <span className="capitalize">{order.status}</span>
       </p>
 
-      <ul className="divide-y divide-neutral-800 rounded-lg border border-neutral-800">
+      <ul className="divide-y divide-neutral-200 rounded-lg border border-neutral-200">
         {(items ?? []).map((item) => (
           <li key={item.id} className="flex items-center justify-between px-4 py-4">
             <div>
               <p className="font-medium">{item.products?.name ?? "Item"}</p>
-              <p className="text-sm text-neutral-400">
+              <p className="text-sm text-neutral-500">
                 {[item.size, item.color].filter(Boolean).join(" / ")} · Qty{" "}
                 {item.quantity}
               </p>
@@ -69,9 +72,9 @@ export default async function OrderDetailPage({
         ))}
       </ul>
 
-      <div className="mt-6 space-y-2 border-t border-neutral-800 pt-6 text-sm">
+      <div className="mt-6 space-y-2 border-t border-neutral-200 pt-6 text-sm">
         <div className="flex items-center justify-between">
-          <span className="text-neutral-400">Subtotal</span>
+          <span className="text-neutral-500">Subtotal</span>
           <span>
             {formatPrice(
               order.total_cents + order.discount_cents - order.shipping_cents
@@ -80,19 +83,19 @@ export default async function OrderDetailPage({
         </div>
         {order.discount_cents > 0 && (
           <div className="flex items-center justify-between">
-            <span className="text-neutral-400">Discount</span>
+            <span className="text-neutral-500">Discount</span>
             <span>−{formatPrice(order.discount_cents)}</span>
           </div>
         )}
         <div className="flex items-center justify-between">
-          <span className="text-neutral-400">Shipping</span>
+          <span className="text-neutral-500">Shipping</span>
           <span>
             {order.shipping_cents > 0
               ? formatPrice(order.shipping_cents)
               : "Free"}
           </span>
         </div>
-        <div className="flex items-center justify-between border-t border-neutral-800 pt-2 text-lg font-semibold">
+        <div className="flex items-center justify-between border-t border-neutral-200 pt-2 text-lg font-semibold">
           <span>Total</span>
           <span>{formatPrice(order.total_cents)}</span>
         </div>

@@ -84,7 +84,7 @@ export default function CartPage() {
         <h1 className="text-2xl font-bold">Your cart is empty</h1>
         <Link
           href="/shop"
-          className="mt-6 inline-block rounded-md bg-white px-6 py-3 text-sm font-medium text-black"
+          className="mt-6 inline-block rounded-md bg-black px-6 py-3 text-sm font-medium text-white"
         >
           Continue shopping
         </Link>
@@ -99,13 +99,13 @@ export default function CartPage() {
     <div className="mx-auto max-w-3xl px-4 py-12">
       <h1 className="mb-8 text-2xl font-bold">Your cart</h1>
 
-      <ul className="divide-y divide-neutral-800">
+      <ul className="divide-y divide-neutral-200">
         {items.map((item) => (
           <li
             key={`${item.productId}-${item.size}-${item.color}`}
             className="flex items-center gap-4 py-4"
           >
-            <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-md bg-neutral-900">
+            <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-md bg-neutral-100">
               {item.image && (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
@@ -117,11 +117,11 @@ export default function CartPage() {
             </div>
             <div className="flex-1">
               <p className="font-medium">{item.name}</p>
-              <p className="text-sm text-neutral-400">
+              <p className="text-sm text-neutral-500">
                 {item.size} / {item.color}
               </p>
               <div className="mt-2 flex items-center gap-3 text-sm">
-                <div className="inline-flex items-center rounded-md border border-neutral-700">
+                <div className="inline-flex items-center rounded-md border border-neutral-300">
                   <button
                     type="button"
                     onClick={() =>
@@ -133,7 +133,7 @@ export default function CartPage() {
                       )
                     }
                     disabled={item.quantity <= 1}
-                    className="px-2 py-1 font-medium disabled:cursor-not-allowed disabled:text-neutral-600"
+                    className="px-2 py-1 font-medium disabled:cursor-not-allowed disabled:text-neutral-300"
                     aria-label="Decrease quantity"
                   >
                     −
@@ -159,7 +159,7 @@ export default function CartPage() {
                   onClick={() =>
                     removeItem(item.productId, item.size, item.color)
                   }
-                  className="text-neutral-400 underline hover:text-white"
+                  className="text-neutral-500 underline hover:text-black active:font-semibold active:text-black"
                 >
                   Remove
                 </button>
@@ -172,37 +172,37 @@ export default function CartPage() {
         ))}
       </ul>
 
-      <div className="mt-8 space-y-2 border-t border-neutral-800 pt-6 text-sm">
+      <div className="mt-8 space-y-2 border-t border-neutral-200 pt-6 text-sm">
         <div className="flex items-center justify-between">
-          <span className="text-neutral-400">Subtotal</span>
+          <span className="text-neutral-500">Subtotal</span>
           <span>{formatPrice(pricing.subtotalCents)}</span>
         </div>
         {pricing.discountCents > 0 && (
           <div className="flex items-center justify-between">
-            <span className="text-neutral-400">Discount (5%)</span>
+            <span className="text-neutral-500">Discount (5%)</span>
             <span>−{formatPrice(pricing.discountCents)}</span>
           </div>
         )}
         <div className="flex items-center justify-between">
-          <span className="text-neutral-400">Shipping</span>
+          <span className="text-neutral-500">Shipping</span>
           <span>
             {pricing.freeShipping ? "Free" : formatPrice(pricing.shippingCents)}
           </span>
         </div>
-        <div className="flex items-center justify-between border-t border-neutral-800 pt-2 text-lg font-semibold">
+        <div className="flex items-center justify-between border-t border-neutral-200 pt-2 text-lg font-semibold">
           <span>Total</span>
           <span>{formatPrice(pricing.totalCents)}</span>
         </div>
       </div>
 
       {!pricing.freeShipping && (
-        <p className="mt-3 text-sm text-neutral-400">
+        <p className="mt-3 text-sm text-neutral-500">
           Add {formatPrice(FREE_SHIPPING_THRESHOLD_CENTS - subtotal)} more to
           get free shipping.
         </p>
       )}
       {!memberDiscountEligible && !pricing.discountApplied && (
-        <p className="mt-1 text-sm text-neutral-400">
+        <p className="mt-1 text-sm text-neutral-500">
           <Link href="/account" className="underline">
             Sign in and opt into emails
           </Link>{" "}
@@ -212,7 +212,7 @@ export default function CartPage() {
         </p>
       )}
 
-      <div className="mt-8 border-t border-neutral-800 pt-6">
+      <div className="mt-8 border-t border-neutral-200 pt-6">
         <h2 className="mb-4 text-lg font-semibold">Contact details</h2>
         <div className="grid grid-cols-2 gap-4">
           <input
@@ -222,7 +222,7 @@ export default function CartPage() {
             onChange={(e) =>
               setContact((c) => ({ ...c, firstName: e.target.value }))
             }
-            className="rounded-md border border-neutral-700 bg-transparent px-3 py-2 text-sm text-white placeholder:text-neutral-500"
+            className="rounded-md border border-neutral-300 px-3 py-2 text-sm"
           />
           <input
             type="text"
@@ -231,7 +231,7 @@ export default function CartPage() {
             onChange={(e) =>
               setContact((c) => ({ ...c, lastName: e.target.value }))
             }
-            className="rounded-md border border-neutral-700 bg-transparent px-3 py-2 text-sm text-white placeholder:text-neutral-500"
+            className="rounded-md border border-neutral-300 px-3 py-2 text-sm"
           />
           <input
             type="email"
@@ -240,7 +240,7 @@ export default function CartPage() {
             onChange={(e) =>
               setContact((c) => ({ ...c, email: e.target.value }))
             }
-            className="col-span-2 rounded-md border border-neutral-700 bg-transparent px-3 py-2 text-sm text-white placeholder:text-neutral-500"
+            className="col-span-2 rounded-md border border-neutral-300 px-3 py-2 text-sm"
           />
           <input
             type="tel"
@@ -249,17 +249,17 @@ export default function CartPage() {
             onChange={(e) =>
               setContact((c) => ({ ...c, phone: e.target.value }))
             }
-            className="col-span-2 rounded-md border border-neutral-700 bg-transparent px-3 py-2 text-sm text-white placeholder:text-neutral-500"
+            className="col-span-2 rounded-md border border-neutral-300 px-3 py-2 text-sm"
           />
         </div>
       </div>
 
-      {error && <p className="mt-4 text-sm text-red-400">{error}</p>}
+      {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
 
       <button
         onClick={handleCheckout}
         disabled={loading || !contactComplete}
-        className="mt-6 w-full rounded-md bg-white px-6 py-3 text-sm font-medium text-black disabled:bg-neutral-700 disabled:text-neutral-400"
+        className="mt-6 w-full rounded-md bg-black px-6 py-3 text-sm font-medium text-white disabled:bg-neutral-400"
       >
         {loading ? "Redirecting to checkout…" : "Checkout"}
       </button>

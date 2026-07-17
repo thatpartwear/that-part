@@ -34,7 +34,7 @@ export default function ForgotPasswordPage() {
     return (
       <div className="mx-auto max-w-sm px-4 py-16">
         <h1 className="mb-4 text-2xl font-bold">Check your email</h1>
-        <p className="text-sm text-neutral-400">
+        <p className="text-sm text-neutral-600">
           If an account exists for <strong>{email}</strong>, we&apos;ve sent a
           link to reset your password.
         </p>
@@ -45,7 +45,7 @@ export default function ForgotPasswordPage() {
   return (
     <div className="mx-auto max-w-sm px-4 py-16">
       <h1 className="mb-2 text-2xl font-bold">Forgot password</h1>
-      <p className="mb-8 text-sm text-neutral-400">
+      <p className="mb-8 text-sm text-neutral-600">
         Enter your email and we&apos;ll send you a link to reset your
         password.
       </p>
@@ -57,21 +57,21 @@ export default function ForgotPasswordPage() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full rounded-md border border-neutral-700 bg-transparent px-3 py-2 text-sm text-white"
+            className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm"
           />
         </div>
 
-        {error && <p className="text-sm text-red-400">{error}</p>}
+        {error && <p className="text-sm text-red-600">{error}</p>}
 
         <button
           type="submit"
           disabled={loading}
-          className="rounded-md bg-white px-6 py-3 text-sm font-medium text-black disabled:bg-neutral-700 disabled:text-neutral-400"
+          className="rounded-md bg-black px-6 py-3 text-sm font-medium text-white disabled:bg-neutral-400"
         >
           {loading ? "Sending…" : "Send reset link"}
         </button>
       </form>
-      <p className="mt-6 text-sm text-neutral-400">
+      <p className="mt-6 text-sm text-neutral-600">
         <Link href="/login" className="underline">
           Back to sign in
         </Link>

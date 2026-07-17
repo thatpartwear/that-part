@@ -50,7 +50,7 @@ export default async function HomePage() {
   return (
     <div>
       <section
-        className="relative border-b border-neutral-800 bg-cover bg-center"
+        className="relative border-b border-neutral-200 bg-cover bg-center"
         style={{ backgroundImage: "url(/hero/hero-1.png)" }}
       >
         <div className="absolute inset-0 bg-black/50" />
@@ -72,7 +72,7 @@ export default async function HomePage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-16">
-        <h2 className="mb-8 text-xl font-semibold text-white">New arrivals</h2>
+        <h2 className="mb-8 text-xl font-semibold">New arrivals</h2>
         {products && products.length > 0 ? (
           <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
             {products.map((product) => (
@@ -80,15 +80,15 @@ export default async function HomePage() {
             ))}
           </div>
         ) : (
-          <p className="text-neutral-400">
+          <p className="text-neutral-500">
             No products yet — seed the catalog to see items here.
           </p>
         )}
       </section>
 
-      <section className="border-t border-neutral-800 px-4 py-16">
+      <section className="border-t border-neutral-200 px-4 py-16">
         <div className="mx-auto max-w-6xl">
-          <h2 className="mb-8 text-xl font-semibold text-white">
+          <h2 className="mb-8 text-xl font-semibold">
             Shop by collection
           </h2>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
@@ -98,7 +98,7 @@ export default async function HomePage() {
                 href={`/shop?category=${collection.category}`}
                 className="group"
               >
-                <div className="aspect-square overflow-hidden rounded-lg bg-neutral-900">
+                <div className="aspect-square overflow-hidden rounded-lg bg-neutral-100">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={collection.image}
@@ -115,24 +115,24 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="border-t border-neutral-800 px-4 py-16">
+      <section className="border-t border-neutral-200 px-4 py-16">
         <div className="mx-auto max-w-6xl">
-          <h2 className="mb-8 text-xl font-semibold text-white">
+          <h2 className="mb-8 text-xl font-semibold">
             Customer reviews
           </h2>
           <div className="grid gap-6 sm:grid-cols-3">
             {reviews.map((review) => (
               <div
                 key={review.name}
-                className="rounded-lg border border-neutral-800 p-5"
+                className="rounded-lg border border-neutral-200 p-5"
               >
-                <div className="mb-2 text-white">
+                <div className="mb-2">
                   {"★".repeat(review.rating)}
-                  <span className="text-neutral-700">
+                  <span className="text-neutral-300">
                     {"★".repeat(5 - review.rating)}
                   </span>
                 </div>
-                <p className="text-sm text-neutral-300">{review.quote}</p>
+                <p className="text-sm text-neutral-600">{review.quote}</p>
                 <p className="mt-3 text-sm font-medium">{review.name}</p>
               </div>
             ))}

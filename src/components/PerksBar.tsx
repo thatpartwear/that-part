@@ -41,8 +41,8 @@ export async function PerksBar() {
   );
 
   return (
-    <div className="overflow-hidden border-b border-neutral-800 bg-black py-1.5">
-      <div className="flex w-max animate-marquee-right whitespace-nowrap text-xs text-neutral-400">
+    <div className="overflow-hidden border-b border-neutral-200 bg-white py-1.5">
+      <div className="flex w-max animate-marquee-right whitespace-nowrap text-xs text-neutral-500">
         <div className="flex">{items}</div>
         <div className="flex" aria-hidden="true">
           {items}

@@ -63,7 +63,7 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
 
   if (confirmationSent) {
     return (
-      <p className="text-sm text-neutral-400">
+      <p className="text-sm text-neutral-600">
         Check your inbox at <strong>{email}</strong> for a confirmation link
         to finish creating your account.
       </p>
@@ -80,7 +80,7 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
             required
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
-            className="w-full rounded-md border border-neutral-700 bg-transparent px-3 py-2 text-sm text-white"
+            className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm"
           />
         </div>
       )}
@@ -91,7 +91,7 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full rounded-md border border-neutral-700 bg-transparent px-3 py-2 text-sm text-white"
+          className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm"
         />
       </div>
       <div>
@@ -102,12 +102,12 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
           minLength={6}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full rounded-md border border-neutral-700 bg-transparent px-3 py-2 text-sm text-white"
+          className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm"
         />
       </div>
 
       {mode === "signup" && (
-        <label className="flex items-start gap-2 text-sm text-neutral-300">
+        <label className="flex items-start gap-2 text-sm text-neutral-600">
           <input
             type="checkbox"
             checked={marketingOptIn}
@@ -121,12 +121,12 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
         </label>
       )}
 
-      {error && <p className="text-sm text-red-400">{error}</p>}
+      {error && <p className="text-sm text-red-600">{error}</p>}
 
       <button
         type="submit"
         disabled={loading}
-        className="rounded-md bg-white px-6 py-3 text-sm font-medium text-black disabled:bg-neutral-700 disabled:text-neutral-400"
+        className="rounded-md bg-black px-6 py-3 text-sm font-medium text-white disabled:bg-neutral-400"
       >
         {loading
           ? "Please wait…"

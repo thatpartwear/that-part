@@ -7,7 +7,7 @@ export default function ShippingReturnsPage() {
 
       <section className="mb-8">
         <h2 className="mb-2 text-lg font-semibold">Shipping</h2>
-        <p className="text-sm text-neutral-400">
+        <p className="text-sm text-neutral-600">
           We currently ship within Egypt. Orders are processed within 1-2
           business days and typically arrive within 3-5 business days,
           depending on your location. Shipping costs are calculated at
@@ -17,10 +17,13 @@ export default function ShippingReturnsPage() {
 
       <section>
         <h2 className="mb-2 text-lg font-semibold">Returns</h2>
-        <p className="text-sm text-neutral-400">
+        <p className="text-sm text-neutral-600">
           If something isn&apos;t right, you can return unworn items with
           tags attached within 14 days of delivery for a refund or exchange.{" "}
-          <Link href="/contact" className="underline">
+          <Link
+            href="/contact"
+            className="underline active:font-semibold active:text-black"
+          >
             Contact us
           </Link>{" "}
           to start a return.

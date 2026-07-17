@@ -28,7 +28,7 @@ export function MarketingOptInToggle({
   }
 
   return (
-    <label className="flex items-center gap-2 text-sm text-neutral-300">
+    <label className="flex items-center gap-2 text-sm text-neutral-600">
       <input
         type="checkbox"
         checked={checked}
