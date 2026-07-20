@@ -195,20 +195,32 @@ export default function CartPage() {
         </div>
       </div>
 
-      {!pricing.freeShipping && (
+      {pricing.freeShipping ? (
         <p className="mt-3 text-sm text-neutral-500">
-          Add {formatPrice(FREE_SHIPPING_THRESHOLD_CENTS - subtotal)} more to
-          get free shipping.
+          You&apos;ve unlocked free shipping on this order.
         </p>
-      )}
-      {!memberDiscountEligible && !pricing.discountApplied && (
-        <p className="mt-1 text-sm text-neutral-500">
-          <Link href="/account" className="underline">
-            Sign in and opt into emails
-          </Link>{" "}
-          for 5% off, or spend{" "}
-          {formatPrice(DISCOUNT_ORDER_THRESHOLD_CENTS - subtotal)} more to
-          unlock it automatically.
+      ) : pricing.discountApplied ? (
+        <p className="mt-3 text-sm text-neutral-500">
+          Your 5% discount is applied. Spend{" "}
+          {formatPrice(FREE_SHIPPING_THRESHOLD_CENTS - subtotal)} more for
+          free shipping instead.
+        </p>
+      ) : (
+        <p className="mt-3 text-sm text-neutral-500">
+          Spend {formatPrice(DISCOUNT_ORDER_THRESHOLD_CENTS - subtotal)} more
+          for 5% off, or {formatPrice(FREE_SHIPPING_THRESHOLD_CENTS - subtotal)}{" "}
+          more for free shipping
+          {!memberDiscountEligible && (
+            <>
+              {" "}
+              — or{" "}
+              <Link href="/account" className="underline">
+                sign in and opt into emails
+              </Link>{" "}
+              for 5% off right now
+            </>
+          )}
+          .
         </p>
       )}
 

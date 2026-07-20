@@ -10,12 +10,17 @@ export function calculatePricing({
   subtotalCents: number;
   isMemberDiscountEligible: boolean;
 }) {
-  const qualifiesByOrderSize = subtotalCents >= DISCOUNT_ORDER_THRESHOLD_CENTS;
-  const discountApplied = isMemberDiscountEligible || qualifiesByOrderSize;
+  // Only one perk ever applies per order: orders big enough for free shipping
+  // get free shipping (and nothing else); otherwise a 5% discount applies if
+  // the order clears the lower threshold or the customer is an opted-in
+  // member.
+  const freeShipping = subtotalCents >= FREE_SHIPPING_THRESHOLD_CENTS;
+  const discountApplied =
+    !freeShipping &&
+    (isMemberDiscountEligible || subtotalCents >= DISCOUNT_ORDER_THRESHOLD_CENTS);
   const discountCents = discountApplied
     ? Math.round(subtotalCents * DISCOUNT_RATE)
     : 0;
-  const freeShipping = subtotalCents >= FREE_SHIPPING_THRESHOLD_CENTS;
   const shippingCents = freeShipping ? 0 : SHIPPING_CENTS;
   const totalCents = subtotalCents - discountCents + shippingCents;
 
