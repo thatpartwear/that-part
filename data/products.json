@@ -8,7 +8,7 @@
     "images": ["/products/core-black.png"],
     "color_images": { "Black": "/products/core-black.png" },
     "sizes": ["S", "M", "L", "XL"],
-    "colors": ["Black", "White", "Silver", "Gold", "Burgundy", "Navy Blue", "Dark Green"],
+    "colors": ["Black", "White", "Grey", "Navy Blue", "Burgundy"],
     "stock": 50
   },
   {
@@ -20,7 +20,7 @@
     "images": ["/products/performance-black.png"],
     "color_images": { "Black": "/products/performance-black.png" },
     "sizes": ["S", "M", "L", "XL"],
-    "colors": ["Black", "White", "Silver", "Gold", "Burgundy", "Navy Blue", "Dark Green"],
+    "colors": ["Black", "White", "Grey", "Navy Blue", "Burgundy"],
     "stock": 50
   },
   {
@@ -32,7 +32,7 @@
     "images": ["/products/motion-black.png"],
     "color_images": { "Black": "/products/motion-black.png" },
     "sizes": ["S", "M", "L", "XL"],
-    "colors": ["Black", "White", "Silver", "Gold", "Burgundy", "Navy Blue", "Dark Green"],
+    "colors": ["Black", "White", "Grey", "Navy Blue", "Burgundy"],
     "stock": 50
   },
   {
@@ -44,7 +44,7 @@
     "images": ["/products/apex-black.png"],
     "color_images": { "Black": "/products/apex-black.png" },
     "sizes": ["S", "M", "L", "XL"],
-    "colors": ["Black", "White", "Silver", "Gold", "Burgundy", "Navy Blue", "Dark Green"],
+    "colors": ["Black", "White", "Grey", "Navy Blue", "Burgundy"],
     "stock": 50
   },
   {
@@ -56,7 +56,7 @@
     "images": ["/products/flex-black.png"],
     "color_images": { "Black": "/products/flex-black.png" },
     "sizes": ["S", "M", "L", "XL"],
-    "colors": ["Black", "White", "Silver", "Gold", "Burgundy", "Navy Blue", "Dark Green"],
+    "colors": ["Black", "White", "Grey", "Navy Blue", "Burgundy"],
     "stock": 50
   },
   {
@@ -68,7 +68,7 @@
     "images": ["/products/utility-black.png"],
     "color_images": { "Black": "/products/utility-black.png" },
     "sizes": ["S", "M", "L", "XL"],
-    "colors": ["Black", "White", "Silver", "Gold", "Burgundy", "Navy Blue", "Dark Green"],
+    "colors": ["Black", "White", "Grey", "Navy Blue", "Burgundy"],
     "stock": 50
   }
 ]
