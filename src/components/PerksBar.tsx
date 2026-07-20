@@ -1,4 +1,9 @@
 import { createClient } from "@/lib/supabase/server";
+import { formatPrice } from "@/lib/format";
+import {
+  DISCOUNT_ORDER_THRESHOLD_CENTS,
+  FREE_SHIPPING_THRESHOLD_CENTS,
+} from "@/lib/pricing";
 
 export async function PerksBar() {
   let signedIn = false;
@@ -31,9 +36,13 @@ export async function PerksBar() {
 
   const items = (
     <>
-      <span className="mx-4">Free shipping on orders over EGP 1,000.00</span>
+      <span className="mx-4">
+        Free shipping on orders over {formatPrice(FREE_SHIPPING_THRESHOLD_CENTS)}
+      </span>
       <span className="mx-4">·</span>
-      <span className="mx-4">5% off orders over EGP 2,000.00</span>
+      <span className="mx-4">
+        5% off orders over {formatPrice(DISCOUNT_ORDER_THRESHOLD_CENTS)}
+      </span>
       <span className="mx-4">·</span>
       <span className="mx-4">{memberMessage}</span>
       <span className="mx-4">·</span>

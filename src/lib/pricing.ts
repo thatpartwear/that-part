@@ -1,6 +1,6 @@
 export const SHIPPING_CENTS = 9500;
-export const FREE_SHIPPING_THRESHOLD_CENTS = 100000;
-export const DISCOUNT_ORDER_THRESHOLD_CENTS = 200000;
+export const FREE_SHIPPING_THRESHOLD_CENTS = 200000;
+export const DISCOUNT_ORDER_THRESHOLD_CENTS = 100000;
 export const DISCOUNT_RATE = 0.05;
 
 export function calculatePricing({
