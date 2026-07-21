@@ -5,6 +5,7 @@ export type Product = {
   description: string | null;
   price_cents: number;
   category: string;
+  gender: string;
   images: string[];
   color_images: Record<string, string>;
   sizes: string[];

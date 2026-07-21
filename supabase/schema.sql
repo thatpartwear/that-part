@@ -36,6 +36,7 @@ create table if not exists public.products (
   description text,
   price_cents integer not null check (price_cents >= 0),
   category text not null,
+  gender text not null default 'men',
   images text[] not null default '{}',
   color_images jsonb not null default '{}',
   sizes text[] not null default '{}',
