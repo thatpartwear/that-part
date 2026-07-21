@@ -71,6 +71,23 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <section className="border-b border-neutral-200 px-4 py-10">
+        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-4">
+          <Link
+            href="/shop?gender=men"
+            className="rounded-lg border border-black bg-black py-8 text-center text-lg font-semibold tracking-wide text-white transition hover:bg-neutral-800"
+          >
+            MEN
+          </Link>
+          <Link
+            href="/shop?gender=women"
+            className="rounded-lg border border-black bg-white py-8 text-center text-lg font-semibold tracking-wide text-black transition hover:bg-neutral-100"
+          >
+            WOMEN
+          </Link>
+        </div>
+      </section>
+
       <section className="mx-auto max-w-6xl px-4 py-16">
         <h2 className="mb-8 text-xl font-semibold">New arrivals</h2>
         {products && products.length > 0 ? (
