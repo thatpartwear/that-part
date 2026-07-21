@@ -1,4 +1,11 @@
 import Link from "next/link";
+import { FacebookIcon, InstagramIcon, TiktokIcon } from "@/components/icons";
+
+const socials = [
+  { label: "Instagram", href: "https://www.instagram.com/thatpartwear/", Icon: InstagramIcon },
+  { label: "Facebook", href: "https://www.facebook.com/thatpartwear", Icon: FacebookIcon },
+  { label: "TikTok", href: "https://www.tiktok.com/@thatpartwear", Icon: TiktokIcon },
+];
 
 const columns = [
   {
@@ -21,6 +28,7 @@ const columns = [
       { label: "Log in", href: "/login" },
       { label: "Sign up", href: "/signup" },
       { label: "Cart", href: "/cart" },
+      { label: "Wishlist", href: "/wishlist" },
     ],
   },
   {
@@ -46,6 +54,20 @@ export function Footer() {
             <p className="mt-2 text-sm text-neutral-500">
               Performance sportswear for every workout.
             </p>
+            <div className="mt-4 flex gap-3">
+              {socials.map(({ label, href, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="text-neutral-500 hover:text-black"
+                >
+                  <Icon className="h-5 w-5" />
+                </a>
+              ))}
+            </div>
           </div>
           {columns.map((column) => (
             <div key={column.title}>

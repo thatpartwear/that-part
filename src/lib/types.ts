@@ -55,3 +55,11 @@ export type CartItem = {
   color: string;
   quantity: number;
 };
+
+export type WishlistItem = {
+  productId: string;
+  slug: string;
+  name: string;
+  priceCents: number;
+  image: string | null;
+};

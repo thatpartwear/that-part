@@ -1,13 +1,14 @@
 import Link from "next/link";
 import type { Product } from "@/lib/types";
 import { formatPrice } from "@/lib/format";
+import { WishlistButton } from "@/components/WishlistButton";
 
 export function ProductCard({ product }: { product: Product }) {
   const image = product.images[0];
 
   return (
     <Link href={`/products/${product.slug}`} className="group block">
-      <div className="aspect-square overflow-hidden rounded-lg bg-neutral-100">
+      <div className="relative aspect-square overflow-hidden rounded-lg bg-neutral-100">
         {image ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -20,6 +21,10 @@ export function ProductCard({ product }: { product: Product }) {
             No image
           </div>
         )}
+        <WishlistButton
+          product={product}
+          className="absolute right-2 top-2 rounded-full bg-white/90 p-1.5 text-black shadow-sm hover:bg-white"
+        />
       </div>
       <div className="mt-3 flex items-center justify-between text-sm">
         <span className="font-medium">{product.name}</span>

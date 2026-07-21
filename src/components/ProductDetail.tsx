@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { Product } from "@/lib/types";
 import { AddToCartForm } from "@/components/AddToCartForm";
+import { WishlistButton } from "@/components/WishlistButton";
 import { formatPrice } from "@/lib/format";
 
 export function ProductDetail({ product }: { product: Product }) {
@@ -27,9 +28,15 @@ export function ProductDetail({ product }: { product: Product }) {
       </div>
 
       <div>
-        <p className="text-sm uppercase tracking-wide text-neutral-500">
-          {product.category}
-        </p>
+        <div className="flex items-start justify-between">
+          <p className="text-sm uppercase tracking-wide text-neutral-500">
+            {product.category}
+          </p>
+          <WishlistButton
+            product={product}
+            className="text-black hover:text-neutral-600"
+          />
+        </div>
         <h1 className="mt-1 text-2xl font-bold">{product.name}</h1>
         <p className="mt-2 text-xl">{formatPrice(product.price_cents)}</p>
         {product.description && (
