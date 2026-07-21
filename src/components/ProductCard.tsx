@@ -23,7 +23,8 @@ export function ProductCard({ product }: { product: Product }) {
         )}
         <WishlistButton
           product={product}
-          className="absolute right-2 top-2 rounded-full bg-white/90 p-1.5 text-black shadow-sm hover:bg-white"
+          className="absolute right-1.5 top-1.5 rounded-full bg-white/90 p-1 text-black shadow-sm hover:bg-white"
+          iconClassName="h-3.5 w-3.5"
         />
       </div>
       <div className="mt-3 flex items-center justify-between text-sm">

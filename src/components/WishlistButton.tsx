@@ -7,9 +7,11 @@ import type { Product } from "@/lib/types";
 export function WishlistButton({
   product,
   className,
+  iconClassName = "h-5 w-5",
 }: {
   product: Product;
   className?: string;
+  iconClassName?: string;
 }) {
   const inWishlist = useWishlistStore((state) =>
     state.items.some((i) => i.productId === product.id)
@@ -38,7 +40,7 @@ export function WishlistButton({
       className={className}
     >
       <HeartIcon
-        className="h-5 w-5"
+        className={iconClassName}
         fill={inWishlist ? "currentColor" : "none"}
       />
     </button>
